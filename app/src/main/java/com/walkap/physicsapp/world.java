@@ -8,6 +8,8 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
+import java.util.Random;
+
 /**
  * Created by Giuseppe on 27/12/2016.
  */
@@ -15,9 +17,12 @@ import org.jbox2d.dynamics.World;
 
 public class world {
 
-    BodyDef pivot;
-    BodyDef ball;
-    World world;
+    private BodyDef pivot;
+    private BodyDef ball;
+    private BodyDef target;
+    private World world;
+    private float maxX;
+    private float maxY;
 
     public world() {
 
@@ -45,6 +50,30 @@ public class world {
         //create the pivot body and add fixture to it
         Body pivotBody = world.createBody(pivot);
         pivotBody.createFixture(pivotFixture);
+
+        //target body definition
+        target = new BodyDef();
+
+        Random rand = new Random();
+        float randX = rand.nextFloat();
+
+        rand = new Random();
+        float randY = rand.nextFloat();
+
+        Vec2 posTarget = new Vec2(randX * maxX,randY * maxY );
+        target.type = BodyType.STATIC;
+
+        //define target shape of the body.
+        CircleShape targetShape = new CircleShape();
+        pivotShape.m_radius = 0.5f;
+
+        //define target fixture of the body.
+        FixtureDef targetFixture = new FixtureDef();
+        pivotFixture.shape = targetShape;
+
+        //create the target body and add fixture to it
+        Body targetBody = world.createBody(target);
+        targetBody.createFixture(targetFixture);
 
     }
 
@@ -86,6 +115,22 @@ public class world {
 
     public void setBall(Vec2 posBall) {
         ball.position.set(posBall);
+    }
+
+    public void setMaxX(Float newX){
+        maxX = newX;
+    }
+
+    public Float getMaxX(){
+        return maxX;
+    }
+
+    public void setMaxY(Float newY){
+        maxY = newY;
+    }
+
+    public Float getMaxY(){
+        return maxY;
     }
 
 }
