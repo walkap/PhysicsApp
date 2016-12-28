@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">PhysicsApp</string>
     <string name="strHello">Hello</string>
+    <string name="strStart">Start</string>
 </resources>
