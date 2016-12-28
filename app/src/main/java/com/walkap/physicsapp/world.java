@@ -25,6 +25,11 @@ public class world {
     private BodyDef target;
     private BodyDef ball;
 
+    private Body pivotBody;
+    private Body swingBody;
+    private Body targetBody;
+    private Body ballBody;
+
     private float maxX;
     private float maxY;
 
@@ -77,9 +82,22 @@ public class world {
         pivotFixture.restitution = 0.5f;
 
         //create the pivot body and add fixture to it
-        Body pivotBody = world.createBody(pivot);
+        pivotBody = world.createBody(pivot);
         pivotBody.createFixture(pivotFixture);
 
+    }
+
+    public void destroyPivot(){
+        world.destroyBody(pivotBody);
+    }
+
+    public void activePivot(Vec2 posPivot){
+        pivot.position.set(posPivot);
+        pivot.active = true;
+    }
+
+    public void disabledPivot(){
+        pivot.active = false;
     }
 
     public Vec2 getPivot() {
@@ -115,9 +133,22 @@ public class world {
         swingFixture.restitution = 0.5f;
 
         //create the swing body and add fixture to it
-        Body swingBody = world.createBody(swing);
+        swingBody = world.createBody(swing);
         swingBody.createFixture(swingFixture);
 
+    }
+
+    public void destroySwing(){
+        world.destroyBody(swingBody);
+    }
+
+    public void activeSwing(Vec2 posSwing){
+        swing.position.set(posSwing);
+        swing.active = true;
+    }
+
+    public void disabledSwing(){
+        swing.active = false;
     }
 
     public Vec2 getSwing() {
@@ -151,8 +182,21 @@ public class world {
         targetFixture.shape = targetShape;
 
         //create the target body and add fixture to it
-        Body targetBody = world.createBody(target);
+        targetBody = world.createBody(target);
         targetBody.createFixture(targetFixture);
+    }
+
+    public void destroyTarget(){
+        world.destroyBody(targetBody);
+    }
+
+    public void activeTarget(Vec2 posTarget){
+        target.position.set(posTarget);
+        target.active = true;
+    }
+
+    public void disabledTarget(){
+        target.active = false;
     }
 
     public void createBall(Vec2 posBall, float density, float friction, float restitution) {
@@ -172,9 +216,22 @@ public class world {
         ballFixture.restitution = restitution;
 
         //create the ball body and add fixture to it
-        Body ballBody = world.createBody(ball);
+        ballBody = world.createBody(ball);
         ballBody.createFixture(ballFixture);
 
+    }
+
+    public void destroyBall(){
+        world.destroyBody(ballBody);
+    }
+
+    public void activeBall(Vec2 posBall){
+        ball.position.set(posBall);
+        ball.active = true;
+    }
+
+    public void disabledBall(){
+        ball.active = false;
     }
 
     public Vec2 getBall() {
