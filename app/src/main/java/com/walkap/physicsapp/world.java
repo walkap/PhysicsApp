@@ -1,5 +1,7 @@
 package com.walkap.physicsapp;
 
+import android.util.Log;
+
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
@@ -36,15 +38,55 @@ public class world {
     public world() {
 
         //world definition
-        Vec2 gravity = new Vec2(10.0f, 0.0f);
+        Vec2 gravity = new Vec2(0.0f, -10.0f);
         world = new World(gravity);
+
+        createGround();
 
         createPivot(10.0f, 10.0f);
 
-        createSwing(20.0f, 20.0f);
+        createSwing(5.0f, 10.0f);
 
         createTarget(2.0f, 2.0f);
 
+    }
+
+    public void playWorld(){
+        float timeStep = 5.0f / 60.f;
+        int velocityIterations = 6;
+        int positionIterations = 2;
+
+        for (int i = 0; i < 60; ++i) {
+            world.step(timeStep, velocityIterations, positionIterations);
+            /*Vec2 position = pivotBody.getPosition();
+            Log.e("playWorld", "posPivot: "+ position.x + "  " + position.y + "\n");
+            */
+            Vec2 position = swingBody.getPosition();
+            Log.e("posSwing", "playWorld: "+ position.x + "  " + position.y + "\n");
+        }
+    }
+
+    private void createGround(){
+        //ground body definition
+        BodyDef ground = new BodyDef();
+        Vec2 posGround = new Vec2(0.0f, 0.0f);
+        ground.position.set(posGround);
+        ground.type = BodyType.STATIC;
+
+        //define ground shape of the body.
+        PolygonShape groundShape = new PolygonShape();
+        groundShape.setAsBox(20.0f,0.0f);
+
+        //define ground fixture of the body.
+        FixtureDef groundFixture = new FixtureDef();
+        groundFixture.shape = groundShape;
+        groundFixture.density = 0.5f;
+        groundFixture.friction = 0.3f;
+        groundFixture.restitution = 1.1f;
+
+        //create the ground body and add fixture to it
+        Body groundBody = world.createBody(ground);
+        groundBody.createFixture(groundFixture);
     }
 
     public void setMaxX(Float newX){
@@ -116,21 +158,16 @@ public class world {
         swing.position.set(posSwing);
         swing.type = BodyType.DYNAMIC;
 
-        Vec2 vertices[] = new Vec2[4];
-        vertices[0] = new Vec2(-10.0f, 0.5f);
-        vertices[1] = new Vec2( 10.0f, 0.5f);
-        vertices[2] = new Vec2( 10.0f,-0.5f);
-        vertices[3] = new Vec2(-10.0f,-0.5f);
-
+        //define swing shape of the body.
         PolygonShape swingShape = new PolygonShape();
-        swingShape.set(vertices, 4);
+        swingShape.setAsBox(5.0f, 0.5f);
 
         //define swing fixture of the body.
         FixtureDef swingFixture = new FixtureDef();
         swingFixture.shape = swingShape;
         swingFixture.density = 0.5f;
         swingFixture.friction = 0.3f;
-        swingFixture.restitution = 0.5f;
+        swingFixture.restitution = 1.1f;
 
         //create the swing body and add fixture to it
         swingBody = world.createBody(swing);
@@ -171,7 +208,7 @@ public class world {
         float randY = rand.nextFloat();
 
         Vec2 posTarget = new Vec2(randX * maxX,randY * maxY );
-        target.type = BodyType.STATIC;
+        target.type = BodyType.KINEMATIC;
 
         //define target shape of the body.
         CircleShape targetShape = new CircleShape();
