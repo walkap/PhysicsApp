@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,11 +9,44 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#2975ba"
     tools:context="com.walkap.physicsapp.MainActivity">
 
     <TextView
-        android:text="Modifica"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="@string/strnWel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:textColor="#a9aaaf"
+        android:textSize="40sp"
+        android:textStyle="italic"
         android:id="@+id/textView" />
-</RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                app:srcCompat="@drawable/start"
+                android:id="@+id/imageButton2"
+                android:onClick="startGame"
+                android:scaleType="fitCenter"
+                android:elevation="0dp"
+                android:cropToPadding="false"
+                android:adjustViewBounds="true"
+                android:layout_height="80dp"
+                android:background="#2975ba"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
