@@ -2,6 +2,7 @@ package com.walkap.physicsapp;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -15,9 +16,18 @@ public class WorldPhysicsLayout extends View {
         super(context, attrs);
     }
 
+    Paint color = new Paint();
+
+    world earth = new world();
+
     @Override
     protected void onDraw(Canvas canvas){
+
         super.onDraw(canvas);
+        color.setARGB(80, 0,0,0);
+        canvas.drawCircle(earth.getPivot().x, earth.getPivot().y, 100, color);
+
     }
+
 
 }
