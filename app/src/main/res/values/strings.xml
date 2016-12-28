@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">PhysicsApp</string>
-    <string name="strnWel">WELCOME TO CATAPULT\nPRESS GO!\nAND ENJOY IT!</string>
+    <string name="strHello">Hello</string>
 </resources>
