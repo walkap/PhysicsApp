@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PhysicsApp</string>
+    <string name="strHello">Ciao</string>
+    <string name="strStart">Inizia</string>
 </resources>
