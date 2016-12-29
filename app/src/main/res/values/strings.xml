@@ -2,4 +2,6 @@
     <string name="app_name">PhysicsApp</string>
     <string name="strHello">Hello</string>
     <string name="strStart">Start</string>
+    <string name="strWelcome">WELCOME TO CATAPULT\nPRESS START AND\nENJOY IT!</string>
+    <string name="btnstart">START</string>
 </resources>
