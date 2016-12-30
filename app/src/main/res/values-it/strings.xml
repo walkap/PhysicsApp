@@ -3,4 +3,5 @@
     <string name="app_name">PhysicsApp</string>
     <string name="strHello">Ciao</string>
     <string name="strStart">Inizia</string>
+    <string name="btnstart">Inizia</string>
 </resources>

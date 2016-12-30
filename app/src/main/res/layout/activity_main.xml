@@ -13,7 +13,6 @@
     tools:context="com.walkap.physicsapp.MainActivity"
     android:orientation="horizontal">
 
-
      <TextView
          android:text="@string/strWelcome"
          android:layout_width="match_parent"
@@ -22,7 +21,7 @@
          android:keepScreenOn="true"
          android:textSize="40sp"
          android:textStyle="italic"
-         android:textColor="@color/colorblack"
+         android:textColor="@color/colorBlack"
          android:id="@+id/textView2" />
 
      <FrameLayout
@@ -32,18 +31,15 @@
 
           <LinearLayout
               android:orientation="horizontal"
-
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="center_horizontal|bottom"
               android:weightSum="1"
-
               tools:ignore="UselessParent">
-
 
                <Button
                    android:text="@string/btnstart"
-                   android:background="@color/colorblack_overlay"
+                   android:background="@color/colorBlack_overlay"
                    android:layout_width="0dp"
                    android:layout_height="wrap_content"
                    android:id="@+id/button"
