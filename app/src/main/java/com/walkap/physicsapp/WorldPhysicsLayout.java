@@ -6,28 +6,23 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-/**
- * Created by robertocapannelli on 28/12/16.
- */
-
 public class WorldPhysicsLayout extends View {
+
+    public WorldPhysicsLayout(Context context){
+        super(context);
+    }
 
     public WorldPhysicsLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     Paint color = new Paint();
+    //world earth = new world();
 
-    world earth = new world();
-
-    @Override
-    protected void onDraw(Canvas canvas){
-
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        color.setARGB(80, 0,0,0);
-        canvas.drawCircle(earth.getPivot().x, earth.getPivot().y, 100, color);
-
+        color.setARGB(100, 0,0,0);
+        canvas.drawCircle(100, 100, 100, color);
+        //canvas.drawCircle(earth.getPivot().x, earth.getPivot().y, 100, color);
     }
-
-
 }
