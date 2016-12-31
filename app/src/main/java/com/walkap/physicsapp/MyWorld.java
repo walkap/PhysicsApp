@@ -28,6 +28,7 @@ public class MyWorld {
     private BodyDef ball;
 
     private CircleShape pivotShape;
+    private PolygonShape swingShape;
 
     private FixtureDef pivotFixture;
     private FixtureDef swingFixture;
@@ -50,9 +51,9 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(35.0f, 35.0f, 15.0f);
+        createPivot(50.0f, 40.0f, 15.0f);
 
-        createSwing(50.0f, 10.0f, 45.0f, 5.0f);
+        createSwing(75.0f, 80.0f, 65.0f, 5.0f);
 
         createTarget(2.0f, 2.0f);
 
@@ -64,8 +65,8 @@ public class MyWorld {
         int positionIterations = 2;
 
         world.step(timeStep, velocityIterations, positionIterations);
-        Vec2 position = pivotBody.getPosition();
-        Log.e("posPivot", "playWorld: "+ position.x + "  " + position.y + "\n");
+        Vec2 position = swingBody.getPosition();
+        Log.e("posSwing", "playWorld: "+ position.x + "  " + position.y + "\n");
     }
 
     private void createGround(){
@@ -77,7 +78,7 @@ public class MyWorld {
 
         //define ground shape of the body.
         PolygonShape groundShape = new PolygonShape();
-        groundShape.setAsBox(50.0f,0.0f);
+        groundShape.setAsBox(1000.0f,10.0f);
 
         //define ground fixture of the body.
         FixtureDef groundFixture = new FixtureDef();
@@ -165,7 +166,7 @@ public class MyWorld {
         swing.type = BodyType.DYNAMIC;
 
         //define swing shape of the body.
-        PolygonShape swingShape = new PolygonShape();
+        swingShape = new PolygonShape();
         swingShape.setAsBox(swingWidth, swingHeight);
 
         //define swing fixture of the body.
@@ -179,6 +180,25 @@ public class MyWorld {
         swingBody = world.createBody(swing);
         swingBody.createFixture(swingFixture);
 
+    }
+
+    public float swingHeight(){
+        Vec2 vec0 = swingShape.getVertex(0);
+        Vec2 vec2 = swingShape.getVertex(2);
+        Log.e("heightSwing", "playWorld: "+ (vec2.y - vec0.y) + "\n");
+        return(vec2.y - vec0.y);
+    }
+
+    public float swingWidth(){
+        Vec2 vec0 = swingShape.getVertex(0);
+        Vec2 vec2 = swingShape.getVertex(2);
+        Log.e("widthSwing", "playWorld: "+ (vec2.x - vec0.x) + "\n");
+        return(vec2.x - vec0.x);
+    }
+
+    public float swingAng(){
+        Log.e("arcSwing", "playWorld: "+ swingBody.getAngle() + "\n");
+        return swingBody.getAngle();
     }
 
     public void destroySwing(){

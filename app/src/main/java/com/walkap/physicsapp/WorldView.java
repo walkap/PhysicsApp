@@ -4,8 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+
+import static android.R.attr.width;
 
 public class WorldView extends View {
 
@@ -13,10 +17,6 @@ public class WorldView extends View {
     Paint paint = new Paint();
 
     Canvas canvas;
-
-    public float x=160,y=150;
-    public float x1 = world.getPivot().x, y1 = world.getPivot().y;
-    //public float x2=150,y2=60;
 
     public WorldView(Context context){
         super(context);
@@ -26,24 +26,6 @@ public class WorldView extends View {
         super(context, attrs);
     }
 
-    public void drawBox(float x, float y){
-        paint.setAntiAlias(true);
-        paint.setColor(Color.RED);
-        canvas.drawRect(x-160, y-10, x+160, y+10, paint);
-    }
-
-    public void drawGround(){
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
-        canvas.drawRect(0, 460, 320, 480, paint);
-    }
-
-    public void drawCircle(float x1,float y1){
-        paint.setAntiAlias(true);
-        paint.setColor(Color.GREEN);
-        canvas.drawCircle(x1, y1, 50, paint);
-    }
-
     public void update(){
         postInvalidate();
     }
@@ -51,16 +33,20 @@ public class WorldView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
-        drawGround();       //blue line
-        drawBox(x, y);      // red line
-        //drawCircle(x1, y1);
-        canvas.drawCircle(x1, y1, world.getPivotRadius(), paint);
-        canvas.drawRect(world.getSwing().x -20, world.getSwing().y - 5, world.getSwing().x + 20, world.getSwing().y + 5, paint);
-        //drawCircle(x2, y2);
-        //Vec2 ballPos = world.getBall();
+
+        paint.setARGB(100, 100, 50, 25);
+
+        canvas.drawCircle(world.getPivot().x, world.getPivot().y, world.getPivotRadius(), paint);
+
+        canvas.save();
+        canvas.rotate(world.swingAng());
+
+        canvas.drawRect(world.getSwing().x - world.swingWidth() / 2, world.getSwing().y - world.swingHeight() / 2,
+                world.getSwing().x + world.swingWidth() / 2, world.getSwing().y + world.swingHeight() / 2, paint);
+
+        canvas.restore();
+
         world.playWorld();
-        x1 = world.getPivot().x;
-        y1 = world.getPivot().y;
         update();
     }
 
