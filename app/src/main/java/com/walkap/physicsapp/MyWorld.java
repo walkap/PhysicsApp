@@ -29,6 +29,7 @@ public class MyWorld {
 
     private CircleShape pivotShape;
     private PolygonShape swingShape;
+    private PolygonShape groundShape;
 
     private FixtureDef pivotFixture;
     private FixtureDef swingFixture;
@@ -39,6 +40,7 @@ public class MyWorld {
     private Body swingBody;
     private Body targetBody;
     private Body ballBody;
+    private Body groundBody;
 
     private float maxX;
     private float maxY;
@@ -51,7 +53,7 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(25.0f, 40.0f, 15.0f);
+        createPivot(25.0f, 20.0f, 15.0f);
 
         createSwing(50.0f, 80.0f, 65.0f, 5.0f);
 
@@ -60,13 +62,11 @@ public class MyWorld {
     }
 
     public void playWorld(){
-        float timeStep = 5.0f / 60.f;
+        float timeStep = 1.0f / 60.f;
         int velocityIterations = 6;
         int positionIterations = 2;
 
         world.step(timeStep, velocityIterations, positionIterations);
-        Vec2 position = swingBody.getPosition();
-        Log.e("posSwing", "playWorld: "+ position.x + "  " + position.y + "\n");
     }
 
     private void createGround(){
@@ -77,7 +77,7 @@ public class MyWorld {
         ground.type = BodyType.STATIC;
 
         //define ground shape of the body.
-        PolygonShape groundShape = new PolygonShape();
+        groundShape = new PolygonShape();
         groundShape.setAsBox(1000.0f,10.0f);
 
         //define ground fixture of the body.
@@ -88,8 +88,25 @@ public class MyWorld {
         groundFixture.restitution = 0.5f;
 
         //create the ground body and add fixture to it
-        Body groundBody = world.createBody(ground);
+        groundBody = world.createBody(ground);
         groundBody.createFixture(groundFixture);
+    }
+
+    public Vec2 getGround() {
+        Vec2 posGround = groundBody.getPosition();
+        return posGround;
+    }
+
+    public float groundHeight(){
+        Vec2 vec0 = groundShape.getVertex(0);
+        Vec2 vec2 = groundShape.getVertex(2);
+        return(vec2.y - vec0.y);
+    }
+
+    public float groundWidth(){
+        Vec2 vec0 = groundShape.getVertex(0);
+        Vec2 vec2 = groundShape.getVertex(2);
+        return(vec2.x - vec0.x);
     }
 
     public void setMaxX(Float newX){
@@ -185,19 +202,16 @@ public class MyWorld {
     public float swingHeight(){
         Vec2 vec0 = swingShape.getVertex(0);
         Vec2 vec2 = swingShape.getVertex(2);
-        Log.e("heightSwing", "playWorld: "+ (vec2.y - vec0.y) + "\n");
         return(vec2.y - vec0.y);
     }
 
     public float swingWidth(){
         Vec2 vec0 = swingShape.getVertex(0);
         Vec2 vec2 = swingShape.getVertex(2);
-        Log.e("widthSwing", "playWorld: "+ (vec2.x - vec0.x) + "\n");
         return(vec2.x - vec0.x);
     }
 
     public float swingAng(){
-        Log.e("arcSwing", "playWorld: "+ swingBody.getAngle() + "\n");
         return swingBody.getAngle();
     }
 
