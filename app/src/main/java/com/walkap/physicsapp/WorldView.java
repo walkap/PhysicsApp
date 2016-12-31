@@ -7,10 +7,6 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.walkap.physicsapp.MyWorld;
-
-import org.jbox2d.common.Vec2;
-
 public class WorldView extends View {
 
     MyWorld world = new MyWorld();
@@ -20,7 +16,7 @@ public class WorldView extends View {
 
     public float x=160,y=150;
     public float x1 = world.getPivot().x, y1 = world.getPivot().y;
-    public float x2=150,y2=60;
+    //public float x2=150,y2=60;
 
     public WorldView(Context context){
         super(context);
@@ -58,8 +54,13 @@ public class WorldView extends View {
         drawGround();       //blue line
         drawBox(x, y);      // red line
         //drawCircle(x1, y1);
+        canvas.drawCircle(x1, y1, world.getPivotRadius(), paint);
+        canvas.drawRect(world.getSwing().x -20, world.getSwing().y - 5, world.getSwing().x + 20, world.getSwing().y + 5, paint);
         //drawCircle(x2, y2);
         //Vec2 ballPos = world.getBall();
+        world.playWorld();
+        x1 = world.getPivot().x;
+        y1 = world.getPivot().y;
         update();
     }
 

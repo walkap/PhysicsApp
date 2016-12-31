@@ -27,6 +27,13 @@ public class MyWorld {
     private BodyDef target;
     private BodyDef ball;
 
+    private CircleShape pivotShape;
+
+    private FixtureDef pivotFixture;
+    private FixtureDef swingFixture;
+    private FixtureDef targetFixture;
+    private FixtureDef ballFixture;
+
     private Body pivotBody;
     private Body swingBody;
     private Body targetBody;
@@ -43,9 +50,9 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(20.0f, 10.0f);
+        createPivot(35.0f, 35.0f, 15.0f);
 
-        createSwing(5.0f, 10.0f);
+        createSwing(50.0f, 10.0f, 45.0f, 5.0f);
 
         createTarget(2.0f, 2.0f);
 
@@ -57,8 +64,8 @@ public class MyWorld {
         int positionIterations = 2;
 
         world.step(timeStep, velocityIterations, positionIterations);
-        Vec2 position = swingBody.getPosition();
-        Log.e("posSwing", "playWorld: "+ position.x + "  " + position.y + "\n");
+        Vec2 position = pivotBody.getPosition();
+        Log.e("posPivot", "playWorld: "+ position.x + "  " + position.y + "\n");
     }
 
     private void createGround(){
@@ -77,7 +84,7 @@ public class MyWorld {
         groundFixture.shape = groundShape;
         groundFixture.density = 0.5f;
         groundFixture.friction = 0.3f;
-        groundFixture.restitution = 1.1f;
+        groundFixture.restitution = 0.5f;
 
         //create the ground body and add fixture to it
         Body groundBody = world.createBody(ground);
@@ -100,7 +107,7 @@ public class MyWorld {
         return maxY;
     }
 
-    private void createPivot(float posX, float posY){
+    private void createPivot(float posX, float posY, float pivotRadius){
         //pivot body definition
         pivot = new BodyDef();
         Vec2 posPivot = new Vec2(posX, posY);
@@ -108,11 +115,11 @@ public class MyWorld {
         pivot.type = BodyType.DYNAMIC;
 
         //define pivot shape of the body.
-        CircleShape pivotShape = new CircleShape();
-        pivotShape.m_radius = 0.5f;
+        pivotShape = new CircleShape();
+        pivotShape.m_radius = pivotRadius;
 
         //define pivot fixture of the body.
-        FixtureDef pivotFixture = new FixtureDef();
+        pivotFixture = new FixtureDef();
         pivotFixture.shape = pivotShape;
         pivotFixture.density = 0.5f;
         pivotFixture.friction = 0.3f;
@@ -138,7 +145,7 @@ public class MyWorld {
     }
 
     public Vec2 getPivot() {
-        Vec2 posPivot = pivot.position;
+        Vec2 posPivot = pivotBody.getPosition();
         return posPivot;
     }
 
@@ -146,7 +153,11 @@ public class MyWorld {
         pivot.position.set(posPivot);
     }
 
-    private void createSwing(Float posX, float posY){
+    public float getPivotRadius(){
+        return(pivotShape.m_radius);
+    }
+
+    private void createSwing(Float posX, float posY,float swingWidth, float swingHeight){
         //swing body definition
         swing = new BodyDef();
         Vec2 posSwing = new Vec2(posX, posY);
@@ -155,14 +166,14 @@ public class MyWorld {
 
         //define swing shape of the body.
         PolygonShape swingShape = new PolygonShape();
-        swingShape.setAsBox(5.0f, 0.5f);
+        swingShape.setAsBox(swingWidth, swingHeight);
 
         //define swing fixture of the body.
-        FixtureDef swingFixture = new FixtureDef();
+        swingFixture = new FixtureDef();
         swingFixture.shape = swingShape;
         swingFixture.density = 0.5f;
         swingFixture.friction = 0.3f;
-        swingFixture.restitution = 1.1f;
+        swingFixture.restitution = 0.5f;
 
         //create the swing body and add fixture to it
         swingBody = world.createBody(swing);
@@ -184,12 +195,8 @@ public class MyWorld {
     }
 
     public Vec2 getSwing() {
-        Vec2 posSwing = swing.position;
+        Vec2 posSwing = swingBody.getPosition();
         return posSwing;
-    }
-
-    public void setSwing(Vec2 posPivot) {
-        swing.position.set(posPivot);
     }
 
     private void createTarget(float posX, float posY){
@@ -210,7 +217,7 @@ public class MyWorld {
         targetShape.m_radius = 0.5f;
 
         //define target fixture of the body.
-        FixtureDef targetFixture = new FixtureDef();
+        targetFixture = new FixtureDef();
         targetFixture.shape = targetShape;
 
         //create the target body and add fixture to it
@@ -241,7 +248,7 @@ public class MyWorld {
         ballShape.m_radius = 0.5f;
 
         //define ball fixture of the body.
-        FixtureDef ballFixture = new FixtureDef();
+        ballFixture = new FixtureDef();
         ballFixture.shape = ballShape;
         ballFixture.density = density;
         ballFixture.friction = friction;
@@ -267,7 +274,7 @@ public class MyWorld {
     }
 
     public Vec2 getBall() {
-        Vec2 posBall = ball.position;
+        Vec2 posBall = ballBody.getPosition();
         return posBall;
     }
 
