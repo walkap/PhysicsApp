@@ -3,8 +3,6 @@ package com.walkap.physicsapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-
-
 public class WorldActivity extends AppCompatActivity {
 
     @Override
@@ -12,8 +10,4 @@ public class WorldActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world);
     }
-
 }
-
-
-
