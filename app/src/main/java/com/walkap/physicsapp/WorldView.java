@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.walkap.physicsapp.MyWorld;
 
+import org.jbox2d.common.Vec2;
+
 public class WorldView extends View {
 
     MyWorld world = new MyWorld();
@@ -53,11 +55,11 @@ public class WorldView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
-        //drawGround(); blue line
-        //drawBox(x, y); red line
+        drawGround();       //blue line
+        drawBox(x, y);      // red line
         //drawCircle(x1, y1);
         //drawCircle(x2, y2);
-        world.getBall();
+        //Vec2 ballPos = world.getBall();
         update();
     }
 

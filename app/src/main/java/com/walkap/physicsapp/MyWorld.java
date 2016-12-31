@@ -215,7 +215,7 @@ public class MyWorld {
 
         //create the target body and add fixture to it
         targetBody = world.createBody(target);
-        //targetBody.createFixture(targetFixture);
+        targetBody.createFixture(targetFixture);
     }
 
     public void destroyTarget(){
