@@ -51,11 +51,11 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(50.0f, 40.0f, 15.0f);
+        createPivot(25.0f, 40.0f, 15.0f);
 
-        createSwing(75.0f, 80.0f, 65.0f, 5.0f);
+        createSwing(50.0f, 80.0f, 65.0f, 5.0f);
 
-        createTarget(2.0f, 2.0f);
+        //createTarget(2.0f, 2.0f);
 
     }
 
@@ -122,7 +122,7 @@ public class MyWorld {
         //define pivot fixture of the body.
         pivotFixture = new FixtureDef();
         pivotFixture.shape = pivotShape;
-        pivotFixture.density = 0.5f;
+        pivotFixture.density = 1.0f;
         pivotFixture.friction = 0.3f;
         pivotFixture.restitution = 0.5f;
 
@@ -172,7 +172,7 @@ public class MyWorld {
         //define swing fixture of the body.
         swingFixture = new FixtureDef();
         swingFixture.shape = swingShape;
-        swingFixture.density = 0.5f;
+        swingFixture.density = 1.0f;
         swingFixture.friction = 0.3f;
         swingFixture.restitution = 0.5f;
 

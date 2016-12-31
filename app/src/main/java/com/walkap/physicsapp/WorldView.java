@@ -39,7 +39,7 @@ public class WorldView extends View {
         canvas.drawCircle(world.getPivot().x, world.getPivot().y, world.getPivotRadius(), paint);
 
         canvas.save();
-        canvas.rotate(world.swingAng());
+        canvas.rotate((float) (world.swingAng() * 57.2958));
 
         canvas.drawRect(world.getSwing().x - world.swingWidth() / 2, world.getSwing().y - world.swingHeight() / 2,
                 world.getSwing().x + world.swingWidth() / 2, world.getSwing().y + world.swingHeight() / 2, paint);
