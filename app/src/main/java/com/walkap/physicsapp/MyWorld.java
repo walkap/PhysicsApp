@@ -1,5 +1,6 @@
 package com.walkap.physicsapp;
 
+import android.app.Activity;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -10,20 +11,21 @@ import org.jbox2d.dynamics.World;
 
 import java.util.Random;
 
-public class world {
+public class MyWorld extends Activity {
 
     private BodyDef pivot;
     private BodyDef ball;
-    private BodyDef target;
-    private World world;
+    private World MyWorld;
     private float maxX;
     private float maxY;
 
-    public world() {
+    public MyWorld() {
+
+        BodyDef target;
 
         //world definition
         Vec2 gravity = new Vec2(10.0f, 0.0f);
-        world = new World(gravity);
+        MyWorld = new World(gravity);
 
         //pivot body definition
         pivot = new BodyDef();
@@ -43,7 +45,7 @@ public class world {
         pivotFixture.restitution = 0.5f;
 
         //create the pivot body and add fixture to it
-        Body pivotBody = world.createBody(pivot);
+        Body pivotBody = MyWorld.createBody(pivot);
         pivotBody.createFixture(pivotFixture);
 
         //target body definition
@@ -67,9 +69,8 @@ public class world {
         pivotFixture.shape = targetShape;
 
         //create the target body and add fixture to it
-        Body targetBody = world.createBody(target);
-        targetBody.createFixture(targetFixture);
-
+        Body targetBody = MyWorld.createBody(target);
+        //targetBody.createFixture(targetFixture);
     }
 
     public Vec2 getPivot() {
@@ -98,7 +99,7 @@ public class world {
         ballFixture.restitution = restitution;
 
         //create the pivot body and add fixture to it
-        Body ballBody = world.createBody(ball);
+        Body ballBody = MyWorld.createBody(ball);
         ballBody.createFixture(ballFixture);
 
     }
