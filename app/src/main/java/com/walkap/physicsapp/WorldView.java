@@ -1,4 +1,4 @@
-package com.walkap.physicsapp2;
+package com.walkap.physicsapp;
 
 import android.content.Context;
 import android.graphics.Canvas;
