@@ -115,7 +115,10 @@ public class WorldView extends View {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             //Log.e("worldView", "e.getX " + e.getX() + "\n");
             //Log.e("worldView", "e.getY " + (height - e.getY()) + "\n");
-            world.createBall((e.getX() - 60.0f), (height - e.getY() + 85.0f));
+            if(!world.ballIsCreate()) {
+                world.createBall((e.getX()), (height - e.getY()));
+            }
+
         }
     }
 
