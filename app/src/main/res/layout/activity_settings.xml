@@ -46,7 +46,7 @@
                     android:layout_weight="1"
                     style="@style/Widget.AppCompat.EditText"
                     android:textSize="12sp"
-                    android:text="@string/rbtnGravity" />
+                    android:hint="@string/rbtnGravity" />
             </LinearLayout>
 
         </LinearLayout>
