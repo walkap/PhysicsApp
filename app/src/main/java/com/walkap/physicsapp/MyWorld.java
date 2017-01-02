@@ -79,6 +79,16 @@ public class MyWorld {
         world.step(timeStep, velocityIterations, positionIterations);
     }
 
+    /*public boolean bulletHitTarget(){
+        boolean hit = false;
+
+        if(bulletBody.m_contactList.other.equals(targetBody)) {
+            hit = true;
+        }
+
+        return hit;
+    }*/
+
     private void createGround(){
         //ground body definition
         BodyDef ground = new BodyDef();
@@ -328,23 +338,23 @@ public class MyWorld {
         target.active = false;
     }
 
-    public void createBall(Vec2 posBall, float density, float friction, float restitution) {
+    public void createBall(Float posX, float posY) {
         ballCreate = true;
 
         ball = new BodyDef();
-        ball.position.set(posBall);
+        ball.position.set(new Vec2(posX, posY));
         ball.type = BodyType.DYNAMIC;
 
         //define ball shape of the body.
         ballShape = new CircleShape();
-        ballShape.m_radius = 0.5f;
+        ballShape.m_radius = 20f;
 
         //define ball fixture of the body.
         ballFixture = new FixtureDef();
         ballFixture.shape = ballShape;
-        ballFixture.density = density;
-        ballFixture.friction = friction;
-        ballFixture.restitution = restitution;
+        swingFixture.friction = 25.0f;
+        swingFixture.restitution = 5.0f;
+        swingFixture.density = 0.75f;
 
         //create the ball body and add fixture to it
         ballBody = world.createBody(ball);

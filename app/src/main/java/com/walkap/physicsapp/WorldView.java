@@ -5,13 +5,19 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+
+import org.jbox2d.common.Vec2;
 
 public class WorldView extends View {
 
-    MyWorld world= new MyWorld();
+    static MyWorld world= new MyWorld();
     Paint paint = new Paint();
     boolean hey = true;
+
+    static float height;
+    static float width;
 
     Canvas canvas;
 
@@ -31,10 +37,9 @@ public class WorldView extends View {
         super.onDraw(canvas);
         this.canvas = canvas;
 
-        float height = this.getHeight();
-        float width = this.getWidth();
-
         if(hey) {
+            height = this.getHeight();
+            width = this.getWidth();
             world.setMaxX(width);
             world.setMaxY(height);
             hey = false;
@@ -94,12 +99,24 @@ public class WorldView extends View {
             canvas.restore();
         }
 
+        /*if(world.bulletHitTarget()){
+            Log.e("worldView", " the bullet hit the target");
+        }*/
+
         //Log.e("WorldView", "height ball" +  (this.getHeight() - world.getPivot().y) + "\n");
         //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y - world.swingHeight() / 2)) + "\n");
         //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y + world.swingHeight() / 2)) + "\n");
 
         world.playWorld();
         update();
+    }
+
+    public static void TouchEvent(MotionEvent e) {
+        if (e.getAction() == MotionEvent.ACTION_DOWN) {
+            //Log.e("worldView", "e.getX " + e.getX() + "\n");
+            //Log.e("worldView", "e.getY " + (height - e.getY()) + "\n");
+            world.createBall((e.getX() - 60.0f), (height - e.getY() + 85.0f));
+        }
     }
 
 }
