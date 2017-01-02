@@ -1,7 +1,5 @@
 package com.walkap.physicsapp;
 
-import android.util.Log;
-
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
@@ -12,6 +10,8 @@ import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
 import java.util.Random;
+
+import static org.jbox2d.common.Settings.PI;
 
 /**
  * Created by Giuseppe on 27/12/2016.
@@ -53,16 +53,16 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(25.0f, 20.0f, 15.0f);
+        createPivot(250.0f, 180.0f, 55.0f);
 
-        createSwing(50.0f, 80.0f, 65.0f, 5.0f);
+        createSwing(265.0f, 246.0f, 200.0f, 10.0f);
 
         //createTarget(2.0f, 2.0f);
 
     }
 
     public void playWorld(){
-        float timeStep = 1.0f / 60.f;
+        float timeStep = 10.0f / 60.f;
         int velocityIterations = 6;
         int positionIterations = 2;
 
@@ -74,22 +74,36 @@ public class MyWorld {
         BodyDef ground = new BodyDef();
         Vec2 posGround = new Vec2(0.0f, 0.0f);
         ground.position.set(posGround);
-        ground.type = BodyType.STATIC;
+        ground.angle = 0.0f;
+        ground.linearVelocity = new Vec2(0.0f,0.0f);
+        ground.angularVelocity = 0.0f;
+        ground.fixedRotation = false;
+        ground.active = true;
+        ground.bullet = false;
+        ground.allowSleep = true;
+        ground.gravityScale = 1.0f;
+        ground.linearDamping = 0.0f;
+        ground.angularDamping = 0.0f;
+        //bodyDef.userData = (Object)ObjectType.Floor;
+        ground.type = BodyType.KINEMATIC;
 
         //define ground shape of the body.
         groundShape = new PolygonShape();
-        groundShape.setAsBox(1000.0f,10.0f);
+        groundShape.setAsBox(1000.0f,5.0f);
 
         //define ground fixture of the body.
         FixtureDef groundFixture = new FixtureDef();
         groundFixture.shape = groundShape;
-        groundFixture.density = 0.5f;
-        groundFixture.friction = 0.3f;
-        groundFixture.restitution = 0.5f;
+        groundFixture.userData = null;
+        groundFixture.friction = 0.5f;
+        groundFixture.restitution = 0.05f;
+        groundFixture.density = 1.0f;
+        groundFixture.isSensor = false;
 
         //create the ground body and add fixture to it
         groundBody = world.createBody(ground);
         groundBody.createFixture(groundFixture);
+
     }
 
     public Vec2 getGround() {
@@ -128,9 +142,20 @@ public class MyWorld {
     private void createPivot(float posX, float posY, float pivotRadius){
         //pivot body definition
         pivot = new BodyDef();
-        Vec2 posPivot = new Vec2(posX, posY);
-        pivot.position.set(posPivot);
+        pivot.position = new Vec2(posX, posY);
+        pivot.angle = 0.0f;
+        pivot.linearVelocity = new Vec2(0.0f, 0.0f);
+        pivot.angularVelocity = 0.0f;
+        pivot.fixedRotation = false;
+        pivot.active = true;
+        pivot.bullet = false;
+        pivot.allowSleep = true;
+        pivot.gravityScale = 1.0f;
+        pivot.linearDamping = 0.0f;
+        pivot.angularDamping = 0.0f;
+        //pivot.userData = (Object)ObjectType.Ball;
         pivot.type = BodyType.DYNAMIC;
+
 
         //define pivot shape of the body.
         pivotShape = new CircleShape();
@@ -139,9 +164,11 @@ public class MyWorld {
         //define pivot fixture of the body.
         pivotFixture = new FixtureDef();
         pivotFixture.shape = pivotShape;
-        pivotFixture.density = 1.0f;
-        pivotFixture.friction = 0.3f;
-        pivotFixture.restitution = 0.5f;
+        pivotFixture.userData = null;
+        pivotFixture.friction = 0.45f;
+        pivotFixture.restitution = 0.75f;
+        pivotFixture.density = 25.0f;
+        pivotFixture.isSensor = false;
 
         //create the pivot body and add fixture to it
         pivotBody = world.createBody(pivot);
@@ -163,8 +190,7 @@ public class MyWorld {
     }
 
     public Vec2 getPivot() {
-        Vec2 posPivot = pivotBody.getPosition();
-        return posPivot;
+        return pivotBody.getPosition();
     }
 
     public void setPivot(Vec2 posPivot) {
@@ -178,8 +204,18 @@ public class MyWorld {
     private void createSwing(Float posX, float posY,float swingWidth, float swingHeight){
         //swing body definition
         swing = new BodyDef();
-        Vec2 posSwing = new Vec2(posX, posY);
-        swing.position.set(posSwing);
+        swing.position = new Vec2(posX, posY);
+        swing.angle = 0.0f;
+        swing.linearVelocity = new Vec2(0.0f,0.0f);
+        swing.angularVelocity = 0.0f;
+        swing.fixedRotation = false;
+        swing.active = true;
+        swing.bullet = false;
+        swing.allowSleep = true;
+        swing.gravityScale = 1.0f;
+        swing.linearDamping = 0.0f;
+        swing.angularDamping = 0.0f;
+        //swing.userData = (Object)ObjectType.Box;
         swing.type = BodyType.DYNAMIC;
 
         //define swing shape of the body.
@@ -189,9 +225,11 @@ public class MyWorld {
         //define swing fixture of the body.
         swingFixture = new FixtureDef();
         swingFixture.shape = swingShape;
-        swingFixture.density = 1.0f;
-        swingFixture.friction = 0.3f;
-        swingFixture.restitution = 0.5f;
+        swingFixture.userData = null;
+        swingFixture.friction = 0.35f;
+        swingFixture.restitution = 0.05f;
+        swingFixture.density = 0.75f;
+        swingFixture.isSensor = false;
 
         //create the swing body and add fixture to it
         swingBody = world.createBody(swing);
@@ -229,8 +267,7 @@ public class MyWorld {
     }
 
     public Vec2 getSwing() {
-        Vec2 posSwing = swingBody.getPosition();
-        return posSwing;
+        return swingBody.getPosition();
     }
 
     private void createTarget(float posX, float posY){
@@ -308,8 +345,7 @@ public class MyWorld {
     }
 
     public Vec2 getBall() {
-        Vec2 posBall = ballBody.getPosition();
-        return posBall;
+        return ballBody.getPosition();
     }
 
     public void setBall(Vec2 posBall) {

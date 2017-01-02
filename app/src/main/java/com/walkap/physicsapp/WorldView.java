@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
+import static java.lang.Math.PI;
 
 public class WorldView extends View {
 
@@ -28,23 +31,37 @@ public class WorldView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
+        float height = this.getHeight();
 
         paint.setARGB(100, 255, 0, 0);
 
-        canvas.drawCircle(world.getPivot().x, world.getPivot().y, world.getPivotRadius(), paint);
+        canvas.save();
+        canvas.translate(world.getPivot().x, world.getPivot().y);
+
+        canvas.drawCircle(0, 0, world.getPivotRadius(), paint);
+
+        canvas.restore();
 
         canvas.save();
+        canvas.translate(world.getSwing().x, world.getSwing().y);
         canvas.rotate((float) (world.swingAng() * 57.2958));
 
-        canvas.drawRect(world.getSwing().x - world.swingWidth() / 2,  (world.getSwing().y - world.swingHeight() / 2),
-                world.getSwing().x + world.swingWidth() / 2, (world.getSwing().y + world.swingHeight() / 2), paint);
+        canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, paint);
 
         canvas.restore();
 
         paint.setARGB(100, 0, 255, 0);
 
-        canvas.drawRect(world.getGround().x - world.groundWidth() / 2,  (world.getGround().y - world.groundHeight() / 2),
-                world.getGround().x + world.groundWidth() / 2, (world.getGround().y + world.groundHeight() / 2), paint);
+        canvas.save();
+        canvas.translate(world.getGround().x, world.getGround().y);
+
+        canvas.drawRect(- world.groundWidth() / 2,  - world.groundHeight() / 2, world.groundWidth() / 2, world.groundHeight() / 2, paint);
+
+        canvas.restore();
+
+        //Log.e("WorldView", "height ball" +  (this.getHeight() - world.getPivot().y) + "\n");
+        //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y - world.swingHeight() / 2)) + "\n");
+        //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y + world.swingHeight() / 2)) + "\n");
 
         world.playWorld();
         update();
