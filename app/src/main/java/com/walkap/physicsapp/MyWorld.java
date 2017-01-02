@@ -55,7 +55,7 @@ public class MyWorld {
 
         createPivot(250.0f, 180.0f, 55.0f);
 
-        createSwing(265.0f, 246.0f, 200.0f, 10.0f);
+        createSwing(265.0f, 246.0f, 250.0f, 10.0f);
 
         //createTarget(2.0f, 2.0f);
 
@@ -95,7 +95,7 @@ public class MyWorld {
         FixtureDef groundFixture = new FixtureDef();
         groundFixture.shape = groundShape;
         groundFixture.userData = null;
-        groundFixture.friction = 0.5f;
+        groundFixture.friction = 5.0f;
         groundFixture.restitution = 0.05f;
         groundFixture.density = 1.0f;
         groundFixture.isSensor = false;
