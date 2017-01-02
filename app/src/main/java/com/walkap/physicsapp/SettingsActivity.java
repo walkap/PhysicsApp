@@ -3,11 +3,11 @@ package com.walkap.physicsapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.CompoundButton;
+
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+
 
 
 /**
@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
     RadioButton rad;
+    CheckBox cb;
     EditText et;
 
 
@@ -28,9 +29,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    public void onRadioButtonClicked(View view) {
+    public void onCheckButtonClicked(View view) {
 
-        boolean checked = ((RadioButton) view).isChecked();
+        boolean checked = ((CheckBox) view).isChecked();
 
         if(checked)
             et.setVisibility(View.GONE);
