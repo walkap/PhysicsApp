@@ -6,4 +6,6 @@
     <string name="btnstart">START</string>
     <string name="btnReset" translatable="false">Reset</string>
     <string name="btnSettings">SETTINGS</string>
+    <string name="rbtnGravity">Type a number</string>
+    <string name="rbtnDefGravity">Default Gravity (Earth)</string>
 </resources>

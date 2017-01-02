@@ -5,4 +5,6 @@
     <string name="strStart">Inizia</string>
     <string name="btnstart">Inizia</string>
     <string name="btnSettings">IMPOSTAZIONI</string>
+    <string name="rbtnGravity">Digita un numero</string>
+    <string name="rbtnDefGravity">Gravita\' standard (Terra)</string>
 </resources>

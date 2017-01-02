@@ -6,4 +6,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorBlack_overlay">#66000000</color>
     <color name="light">#ffffff</color>
+    <color name="colorSettings">#dc2b37</color>
 </resources>
