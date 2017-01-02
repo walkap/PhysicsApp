@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -15,26 +16,26 @@ import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
     RadioButton rad;
-    TextView tv;
+    EditText et;
 
 
     @Override
     protected void onCreate(Bundle savedIstanceState) {
         super.onCreate(savedIstanceState);
         setContentView(R.layout.activity_settings);
-        tv=(TextView) findViewById(R.id.textView3);
-        tv.setVisibility(View.GONE);
+        et=(EditText) findViewById(R.id.editText);
+        et.setVisibility(View.VISIBLE);
     }
 
 
     public void onRadioButtonClicked(View view) {
 
-        boolean checked = (rad.isChecked());
+        boolean checked = ((RadioButton) view).isChecked();
 
         if(checked)
-            tv.setVisibility(View.GONE);
+            et.setVisibility(View.GONE);
         else
-            tv.setVisibility(View.VISIBLE);
+            et.setVisibility(View.VISIBLE);
     }
 }
 
