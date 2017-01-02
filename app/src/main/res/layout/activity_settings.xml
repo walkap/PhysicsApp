@@ -25,7 +25,7 @@
                     android:text="@string/cbbtnDefGravity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/checkBox"
+                    android:id="@+id/cbGravity"
                     />
 
             </LinearLayout>
@@ -42,10 +42,10 @@
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editText"
-                    android:layout_weight="1"
                     style="@style/Widget.AppCompat.EditText"
                     android:textSize="12sp"
-                    android:hint="@string/edtxtGravity" />
+                    android:hint="@string/edtxtGravity"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </LinearLayout>
