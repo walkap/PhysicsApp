@@ -67,6 +67,16 @@ public class WorldView extends View {
 
         canvas.restore();
 
+        paint.setARGB(100, 120, 120, 0);
+
+        canvas.save();
+        canvas.translate(world.getBullet().x, height - world.getBullet().y);
+        canvas.rotate((float) - (world.bulletAng() * 57.2958));
+
+        canvas.drawRect(- world.bulletWidth() / 2, - world.bulletHeight() / 2, world.bulletWidth() / 2, world.bulletHeight() / 2, paint);
+
+        canvas.restore();
+
         paint.setARGB(100, 0, 255, 0);
 
         canvas.save();
@@ -75,6 +85,14 @@ public class WorldView extends View {
         canvas.drawRect(- world.groundWidth() / 2,  - world.groundHeight() / 2, world.groundWidth() / 2, world.groundHeight() / 2, paint);
 
         canvas.restore();
+        if(world.ballIsCreate()) {
+            canvas.save();
+            canvas.translate(world.getBall().x, height - world.getBall().y);
+
+            canvas.drawCircle(0, 0, world.geBallRadius(), paint);
+
+            canvas.restore();
+        }
 
         //Log.e("WorldView", "height ball" +  (this.getHeight() - world.getPivot().y) + "\n");
         //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y - world.swingHeight() / 2)) + "\n");

@@ -28,25 +28,32 @@ public class MyWorld {
     private BodyDef swing;
     private BodyDef target;
     private BodyDef ball;
+    private BodyDef bullet;
 
     private CircleShape pivotShape;
     private PolygonShape swingShape;
     private PolygonShape groundShape;
     private CircleShape targetShape;
+    private CircleShape ballShape;
+    private PolygonShape bulletShape;
 
     private FixtureDef pivotFixture;
     private FixtureDef swingFixture;
     private FixtureDef targetFixture;
     private FixtureDef ballFixture;
+    private FixtureDef bulletFixture;
 
     private Body pivotBody;
     private Body swingBody;
     private Body targetBody;
     private Body ballBody;
     private Body groundBody;
+    private Body bulletBody;
 
     private float maxX;
     private float maxY;
+
+    private boolean ballCreate = false;
 
     public MyWorld() {
 
@@ -60,10 +67,12 @@ public class MyWorld {
 
         createSwing(265.0f, 80.0f, 250.0f, 10.0f);
 
+        createBullet(425.0f, 105.0f);
+
     }
 
     public void playWorld(){
-        float timeStep = 10.0f / 60.f;
+        float timeStep = 20.0f / 60.f;
         int velocityIterations = 6;
         int positionIterations = 2;
 
@@ -85,7 +94,6 @@ public class MyWorld {
         ground.gravityScale = 1.0f;
         ground.linearDamping = 0.0f;
         ground.angularDamping = 0.0f;
-        //bodyDef.userData = (Object)ObjectType.Floor;
         ground.type = BodyType.KINEMATIC;
 
         //define ground shape of the body.
@@ -155,7 +163,6 @@ public class MyWorld {
         pivot.gravityScale = 1.0f;
         pivot.linearDamping = 0.0f;
         pivot.angularDamping = 0.0f;
-        //pivot.userData = (Object)ObjectType.Ball;
         pivot.type = BodyType.DYNAMIC;
 
 
@@ -167,7 +174,7 @@ public class MyWorld {
         pivotFixture = new FixtureDef();
         pivotFixture.shape = pivotShape;
         pivotFixture.userData = null;
-        pivotFixture.friction = 0.45f;
+        pivotFixture.friction = 25.0f;
         pivotFixture.restitution = 0.75f;
         pivotFixture.density = 25.0f;
         pivotFixture.isSensor = false;
@@ -217,7 +224,6 @@ public class MyWorld {
         swing.gravityScale = 1.0f;
         swing.linearDamping = 0.0f;
         swing.angularDamping = 0.0f;
-        //swing.userData = (Object)ObjectType.Box;
         swing.type = BodyType.DYNAMIC;
 
         //define swing shape of the body.
@@ -228,7 +234,7 @@ public class MyWorld {
         swingFixture = new FixtureDef();
         swingFixture.shape = swingShape;
         swingFixture.userData = null;
-        swingFixture.friction = 0.35f;
+        swingFixture.friction = 25.0f;
         swingFixture.restitution = 0.05f;
         swingFixture.density = 0.75f;
         swingFixture.isSensor = false;
@@ -323,12 +329,14 @@ public class MyWorld {
     }
 
     public void createBall(Vec2 posBall, float density, float friction, float restitution) {
+        ballCreate = true;
+
         ball = new BodyDef();
         ball.position.set(posBall);
         ball.type = BodyType.DYNAMIC;
 
         //define ball shape of the body.
-        CircleShape ballShape = new CircleShape();
+        ballShape = new CircleShape();
         ballShape.m_radius = 0.5f;
 
         //define ball fixture of the body.
@@ -345,6 +353,7 @@ public class MyWorld {
     }
 
     public void destroyBall(){
+        ballCreate = false;
         world.destroyBody(ballBody);
     }
 
@@ -361,9 +370,84 @@ public class MyWorld {
         return ballBody.getPosition();
     }
 
+    public float geBallRadius(){
+        return(ballShape.m_radius);
+    }
+
     public void setBall(Vec2 posBall) {
         ball.position.set(posBall);
     }
 
+    public boolean ballIsCreate(){
+        return ballCreate;
+    }
+
+    private void createBullet(Float posX, float posY){
+        //bullet body definition
+        bullet = new BodyDef();
+        bullet.position = new Vec2(posX, posY);
+        bullet.angle = 0.0f;
+        bullet.linearVelocity = new Vec2(0.0f,0.0f);
+        bullet.angularVelocity = 0.0f;
+        bullet.fixedRotation = false;
+        bullet.active = true;
+        bullet.bullet = false;
+        bullet.allowSleep = true;
+        bullet.gravityScale = 1.0f;
+        bullet.linearDamping = 0.0f;
+        bullet.angularDamping = 0.0f;
+        bullet.type = BodyType.DYNAMIC;
+
+        //define bullet shape of the body.
+        bulletShape = new PolygonShape();
+        bulletShape.setAsBox(15.0f, 15.0f);
+
+        //define bullet fixture of the body.
+        bulletFixture = new FixtureDef();
+        bulletFixture.shape = swingShape;
+        bulletFixture.userData = null;
+        bulletFixture.friction = 25.0f;
+        bulletFixture.restitution = 0.05f;
+        bulletFixture.density = 0.75f;
+        bulletFixture.isSensor = false;
+
+        //create the bullet body and add fixture to it
+        bulletBody = world.createBody(bullet);
+        bulletBody.createFixture(bulletFixture);
+
+    }
+
+    public float bulletHeight(){
+        Vec2 vec0 = bulletShape.getVertex(0);
+        Vec2 vec2 = bulletShape.getVertex(2);
+        return(vec2.y - vec0.y);
+    }
+
+    public float bulletWidth(){
+        Vec2 vec0 = bulletShape.getVertex(0);
+        Vec2 vec2 = bulletShape.getVertex(2);
+        return(vec2.x - vec0.x);
+    }
+
+    public float bulletAng(){
+        return bulletBody.getAngle();
+    }
+
+    public void destroyBullet(){
+        world.destroyBody(bulletBody);
+    }
+
+    public void activeBullet(Vec2 posBullet){
+        bullet.position.set(posBullet);
+        bullet.active = true;
+    }
+
+    public void disabledBullet(){
+        bullet.active = false;
+    }
+
+    public Vec2 getBullet() {
+        return bulletBody.getPosition();
+    }
 
 }
