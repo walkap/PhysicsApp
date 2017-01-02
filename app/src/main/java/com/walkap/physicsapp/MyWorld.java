@@ -1,5 +1,7 @@
 package com.walkap.physicsapp;
 
+import android.util.Log;
+
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
@@ -30,6 +32,7 @@ public class MyWorld {
     private CircleShape pivotShape;
     private PolygonShape swingShape;
     private PolygonShape groundShape;
+    private CircleShape targetShape;
 
     private FixtureDef pivotFixture;
     private FixtureDef swingFixture;
@@ -53,11 +56,9 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(250.0f, 180.0f, 55.0f);
+        createPivot(250.0f, 40.0f, 30.0f);
 
-        createSwing(265.0f, 246.0f, 250.0f, 10.0f);
-
-        //createTarget(2.0f, 2.0f);
+        createSwing(265.0f, 80.0f, 250.0f, 10.0f);
 
     }
 
@@ -133,6 +134,7 @@ public class MyWorld {
 
     public void setMaxY(Float newY){
         maxY = newY;
+        createTarget();
     }
 
     public Float getMaxY(){
@@ -270,7 +272,9 @@ public class MyWorld {
         return swingBody.getPosition();
     }
 
-    private void createTarget(float posX, float posY){
+    private void createTarget(){
+        float radius = 20.0f;
+
         //target body definition
         target = new BodyDef();
 
@@ -280,12 +284,13 @@ public class MyWorld {
         rand = new Random();
         float randY = rand.nextFloat();
 
-        Vec2 posTarget = new Vec2(randX * maxX,randY * maxY );
+        target.position = new Vec2(randX * maxX / 2 + maxX/2 - radius ,randY * maxY / 2 + maxY/2 - radius);
+
         target.type = BodyType.KINEMATIC;
 
         //define target shape of the body.
-        CircleShape targetShape = new CircleShape();
-        targetShape.m_radius = 0.5f;
+        targetShape = new CircleShape();
+        targetShape.m_radius = radius;
 
         //define target fixture of the body.
         targetFixture = new FixtureDef();
@@ -294,6 +299,14 @@ public class MyWorld {
         //create the target body and add fixture to it
         targetBody = world.createBody(target);
         targetBody.createFixture(targetFixture);
+    }
+
+    public Vec2 getTarget() {
+        return targetBody.getPosition();
+    }
+
+    public float getTargetRadius(){
+        return(targetShape.m_radius);
     }
 
     public void destroyTarget(){

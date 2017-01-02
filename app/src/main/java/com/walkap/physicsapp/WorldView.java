@@ -9,8 +9,9 @@ import android.view.View;
 
 public class WorldView extends View {
 
-    MyWorld world = new MyWorld();
+    MyWorld world= new MyWorld();
     Paint paint = new Paint();
+    boolean hey = true;
 
     Canvas canvas;
 
@@ -29,8 +30,15 @@ public class WorldView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
-        float height = this.getHeight();
 
+        float height = this.getHeight();
+        float width = this.getWidth();
+
+        if(hey) {
+            world.setMaxX(width);
+            world.setMaxY(height);
+            hey = false;
+        }
         paint.setARGB(100, 255, 0, 0);
 
         canvas.save();
@@ -45,6 +53,15 @@ public class WorldView extends View {
         canvas.rotate((float) - (world.swingAng() * 57.2958));
 
         canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, paint);
+
+        canvas.restore();
+
+        paint.setARGB(100, 0, 0, 255);
+
+        canvas.save();
+        canvas.translate(world.getTarget().x, height - world.getTarget().y);
+
+        canvas.drawCircle(0, 0, world.getTargetRadius(), paint);
 
         canvas.restore();
 
