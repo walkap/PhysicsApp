@@ -4,4 +4,5 @@
     <string name="strStart">Start</string>
     <string name="strWelcome">WELCOME TO CATAPULT\nPRESS START AND\nENJOY IT!</string>
     <string name="btnstart">START</string>
+    <string name="btnReset" translatable="false">Reset</string>
 </resources>
