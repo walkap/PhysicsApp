@@ -9,15 +9,19 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.common.Vec3;
 
 public class WorldView extends View {
 
-    static MyWorld world= new MyWorld();
+    static MyWorld world;
     Paint paint = new Paint();
     boolean hey = true;
 
     static float height;
     static float width;
+
+    boolean gravityDefault = true;
+    Vec2 gravity;
 
     Canvas canvas;
 
@@ -38,6 +42,12 @@ public class WorldView extends View {
         this.canvas = canvas;
 
         if(hey) {
+            if(gravityDefault) {
+                world = new MyWorld();
+            }
+            else {
+                world = new MyWorld(gravity);
+            }
             height = this.getHeight();
             width = this.getWidth();
             world.setMaxX(width);
@@ -109,6 +119,14 @@ public class WorldView extends View {
 
         world.playWorld();
         update();
+    }
+
+    public void setGravityDefault(boolean gravityDefaultSet){
+        gravityDefault = gravityDefaultSet;
+    }
+
+    public void setGravity(Vec2 gravitySet){
+        gravity = gravitySet;
     }
 
     public static void TouchEvent(MotionEvent e) {

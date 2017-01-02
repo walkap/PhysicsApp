@@ -68,6 +68,21 @@ public class MyWorld {
 
     }
 
+    public MyWorld(Vec2 gravity) {
+
+        //world definition
+        world = new World(gravity);
+
+        createGround();
+
+        createPivot(250.0f, 40.0f, 30.0f);
+
+        createSwing(265.0f, 80.0f, 250.0f, 10.0f);
+
+        createBullet(425.0f, 105.0f);
+
+    }
+
     public void playWorld(){
         float timeStep = 20.0f / 60.f;
         int velocityIterations = 6;
