@@ -54,6 +54,8 @@ public class WorldView extends View {
 
         canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, paint);
 
+
+
         canvas.restore();
 
         paint.setARGB(100, 0, 0, 255);
