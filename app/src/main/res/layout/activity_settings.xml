@@ -6,40 +6,48 @@
 
     tools:context=".SettingsActivity">
 
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </LinearLayout>
-
-
-        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
-            <RadioButton
-                android:text="@string/rbtnDefGravity"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton"
-                android:onClick="onRadioButtonClicked"
-                android:layout_weight="1" />
+                android:layout_weight="1">
 
-            <TextView
-                android:text="@string/rbtnGravity"
+                <CheckBox
+                    android:text="@string/cbbtnDefGravity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox"
+                    android:onClick="onCheckButtonClicked"
+                    android:layout_weight="1" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView3"
-                android:layout_weight="1"
-                android:textAllCaps="false"
-                android:textStyle="normal|italic"
-                android:textAlignment="center"
-                />
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editText"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:textSize="12sp"
+                    android:hint="@string/edtxtGravity" />
+            </LinearLayout>
 
         </LinearLayout>
 
