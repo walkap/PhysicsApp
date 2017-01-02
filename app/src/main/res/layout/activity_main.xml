@@ -5,59 +5,59 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimary"
-    tools:context="com.walkap.physicsapp.MainActivity"
-    android:orientation="horizontal">
+    tools:context="com.walkap.physicsapp.MainActivity">
 
-     <TextView
-         android:text="@string/strWelcome"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:gravity="center"
-         android:keepScreenOn="true"
-         android:textSize="10pt"
-         android:textStyle="italic"
-         android:textColor="@color/light"
-         android:id="@+id/textView2" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:text="@string/strWelcome"
+        android:textColor="@color/light"
+        android:textSize="10pt"
+        android:textStyle="italic" />
 
-     <FrameLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:fitsSystemWindows="true">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-          <Button
-                   android:text="@string/btnSettings"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:background="@color/colorBlack_overlay"
-                   android:textColor="@color/light"
-                   android:id="@+id/button2"
-              android:visibility="visible"
-                   android:textAppearance="@style/TextAppearance.AppCompat"
-                   android:onClick="settingsGame" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack_overlay"
+            android:onClick="settingsGame"
+            android:text="@string/btnSettings"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="@color/light"
+            android:visibility="visible" />
 
-          <LinearLayout
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center_horizontal|bottom"
-              android:weightSum="1"
-              tools:ignore="UselessParent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            tools:ignore="UselessParent">
 
-               <Button
-                   android:text="@string/btnstart"
-                   android:background="@color/colorBlack_overlay"
-                   android:layout_width="0dp"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/button"
-                   android:onClick="startGame"
-                   android:layout_weight="1"
-                   android:textColor="@color/light"/>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBlack_overlay"
+                android:onClick="startGame"
+                android:text="@string/btnstart"
+                android:textColor="@color/light" />
 
-          </LinearLayout>
-     </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
 </FrameLayout>

@@ -1,7 +1,5 @@
 package com.walkap.physicsapp;
 
-import android.util.Log;
-
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
@@ -13,7 +11,6 @@ import org.jbox2d.dynamics.World;
 
 import java.util.Random;
 
-import static org.jbox2d.common.Settings.PI;
 
 /**
  * Created by Giuseppe on 27/12/2016.
