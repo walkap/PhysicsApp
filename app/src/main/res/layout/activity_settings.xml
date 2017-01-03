@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".SettingsActivity">
-
 
     <LinearLayout
             android:orientation="horizontal"
@@ -13,13 +11,13 @@
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <CheckBox
                     android:text="@string/cbbtnDefGravity"
@@ -32,7 +30,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
@@ -44,8 +42,7 @@
                     android:id="@+id/editText"
                     style="@style/Widget.AppCompat.EditText"
                     android:textSize="12sp"
-                    android:hint="@string/edtxtGravity"
-                    android:visibility="gone"/>
+                    android:hint="@string/edtxtGravity"/>
             </LinearLayout>
 
         </LinearLayout>
