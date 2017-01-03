@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorBlack_overlay"
                 android:onClick="startGame"
-                android:text="@string/btnstart"
+                android:text="@string/btnStart"
                 android:textColor="@color/light" />
 
         </LinearLayout>
