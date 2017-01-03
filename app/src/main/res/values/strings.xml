@@ -6,4 +6,8 @@
     <string name="btnSettings">SETTINGS</string>
     <string name="edtxtGravity">Type a number</string>
     <string name="cbbtnDefGravity">Default Gravity (Earth)</string>
+    <string name="strEarth">Earth</string>
+    <string name="strJupiter">Jupiter</string>
+    <string name="strVenus">Venus</string>
+    <string name="strSaturn">Saturn</string>
 </resources>
