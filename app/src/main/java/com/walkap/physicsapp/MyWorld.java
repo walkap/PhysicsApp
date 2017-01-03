@@ -86,7 +86,11 @@ public class MyWorld {
     public void resetWorld(){
         world.destroyBody(pivotBody);
         world.destroyBody(swingBody);
-        world.destroyBody(ballBody);
+
+        if(ballIsCreate()){
+            world.destroyBody(ballBody);
+        }
+
         world.destroyBody(targetBody);
         world.destroyBody(bulletBody);
 
@@ -95,7 +99,6 @@ public class MyWorld {
         createSwing(265.0f, 80.0f, 250.0f, 10.0f);
 
         createBullet(425.0f, 105.0f);
-
     }
 
     public void playWorld(){
