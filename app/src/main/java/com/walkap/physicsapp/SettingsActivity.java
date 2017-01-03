@@ -8,9 +8,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import org.jbox2d.common.Vec2;
 
+import static android.R.attr.type;
+import static android.R.attr.value;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -19,12 +22,58 @@ public class SettingsActivity extends AppCompatActivity {
     //EditText et;
     WorldView world;
     Vec2 gravity;
-    float x = 0.0f , y;
+    float x = 0.0f , ygravity;
+    RadioButton rbEarth;
+    RadioButton rbVenus;
+    RadioButton rbJupiter;
+    RadioButton rbSaturn;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedIstanceState) {
         super.onCreate(savedIstanceState);
         setContentView(R.layout.activity_settings);
+        RadioGroup radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
+        radiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                switch (checkedId) {
+
+                    // Set Earth Gravity
+                    case R.id.radioButton4:
+                        ygravity = -10f;
+                        break;
+
+                    // Set Venus Gravity
+                    case R.id.radioButton3:
+                        ygravity = -9f;
+                        break;
+
+                   // Set Jupiter Gravity
+                    case R.id.radioButton:
+                        ygravity = -25f;
+                        break;
+
+                    // Set Saturn Gravity
+                    case R.id.radioButton2:
+                        ygravity = -11f;
+                        break;
+                }
+
+                gravity = new Vec2(x , ygravity);
+                //world.setGravity(gravity);
+            }
+        });
+
+
+
+
+
+
+
         /*et=(EditText) findViewById(R.id.editText);
         et.setVisibility(View.VISIBLE);
 

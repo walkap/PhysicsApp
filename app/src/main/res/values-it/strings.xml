@@ -4,9 +4,10 @@
     <string name="btnSettings">IMPOSTAZIONI</string>
     <string name="cbbtnDefGravity">Gravita della terra</string>
     <string name="edtxtGravity">Inserisci un numero</string>
+    <string name="txtvGravity">SCEGLI LA GRAVITA</string>
     <string name="strEarth">Terra</string>
     <string name="strJupiter">Giove</string>
     <string name="strSaturn">Saturno</string>
     <string name="strVenus">Venere</string>
-    <string name="txtvGravity">SCEGLI LA GRAVITA</string>
+
 </resources>
