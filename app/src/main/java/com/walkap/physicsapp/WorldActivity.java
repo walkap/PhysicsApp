@@ -14,11 +14,17 @@ public class WorldActivity extends AppCompatActivity implements View.OnClickList
     Button resetButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world);
 
         resetButton = (Button) findViewById(R.id.resetButton);
         resetButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
     }
 
     public void onClick(View resetButton){

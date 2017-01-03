@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.common.Vec3;
 
 public class WorldView extends View {
 
@@ -34,6 +33,21 @@ public class WorldView extends View {
     }
 
     public void update(){
+        /*Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Handler h = new Handler (Lopper.getMainLopper());
+                h.post(new Runnable() {
+                    public void run() {
+                        invalidate();
+                    }
+                });
+                //postInvalidate();
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();*/
+
         postInvalidate();
     }
 
@@ -69,8 +83,6 @@ public class WorldView extends View {
 
         canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, paint);
 
-
-
         canvas.restore();
 
         paint.setARGB(100, 0, 0, 255);
@@ -100,6 +112,7 @@ public class WorldView extends View {
         canvas.drawRect(- world.groundWidth() / 2,  - world.groundHeight() / 2, world.groundWidth() / 2, world.groundHeight() / 2, paint);
 
         canvas.restore();
+
         if(world.ballIsCreate()) {
             canvas.save();
             canvas.translate(world.getBall().x, height - world.getBall().y);
@@ -119,6 +132,7 @@ public class WorldView extends View {
 
         world.playWorld();
         update();
+
     }
 
     public void setGravityDefault(boolean gravityDefaultSet){
@@ -132,12 +146,13 @@ public class WorldView extends View {
     public static void TouchEvent(MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             //Log.e("worldView", "e.getX " + e.getX() + "\n");
-            //Log.e("worldView", "e.getY " + (height - e.getY()) + "\n");
+            //Log.e("worldView", "e.getY " + (e.getY()) + "\n");
             if(!world.ballIsCreate()) {
-                world.createBall((e.getX()), (height - e.getY()));
+                world.createBall((e.getX()), ( height - e.getY() + 415.0f));
             }
 
         }
     }
+
 
 }
