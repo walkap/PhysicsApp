@@ -205,7 +205,7 @@ public class MyWorld {
         pivot.gravityScale = 1.0f;
         pivot.linearDamping = 0.0f;
         pivot.angularDamping = 0.0f;
-        pivot.type = BodyType.DYNAMIC;
+        pivot.type = BodyType.KINEMATIC;
 
 
         //define pivot shape of the body.
@@ -216,8 +216,8 @@ public class MyWorld {
         pivotFixture = new FixtureDef();
         pivotFixture.shape = pivotShape;
         pivotFixture.userData = null;
-        pivotFixture.friction = 25.0f;
-        pivotFixture.restitution = 0.75f;
+        pivotFixture.friction = 0.5f;
+        pivotFixture.restitution = 0.0f;
         pivotFixture.density = 25.0f;
         pivotFixture.isSensor = false;
 
