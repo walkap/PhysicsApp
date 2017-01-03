@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PhysicsApp</string>
-    <string name="strHello">Ciao</string>
-    <string name="strStart">Inizia</string>
-    <string name="btnstart">Inizia</string>
+    <string name="btnStart">INIZIA</string>
     <string name="btnSettings">IMPOSTAZIONI</string>
-    <string name="rbtnGravity">Digita un numero</string>
-    <string name="rbtnDefGravity">Gravita\' standard (Terra)</string>
+    <string name="cbbtnDefGravity">Gravita della terra</string>
+    <string name="edtxtGravity">Inserisci un numero</string>
 </resources>
