@@ -13,7 +13,11 @@ import org.jbox2d.common.Vec2;
 public class WorldView extends View {
 
     static MyWorld world;
-    Paint paint = new Paint();
+    Paint red = new Paint();
+    Paint green = new Paint();
+    Paint grey = new Paint();
+    Paint blue = new Paint();
+
     boolean hey = true;
 
     static float height;
@@ -55,6 +59,11 @@ public class WorldView extends View {
         super.onDraw(canvas);
         this.canvas = canvas;
 
+        red.setARGB(100, 255, 0, 0);
+        green.setARGB(100, 0, 255, 0);
+        grey.setARGB(100, 120, 120, 0);
+        blue.setARGB(100, 0, 0, 255);
+
         if(hey) {
             if(gravityDefault) {
                 world = new MyWorld();
@@ -68,57 +77,50 @@ public class WorldView extends View {
             world.setMaxY(height);
             hey = false;
         }
-        paint.setARGB(100, 255, 0, 0);
 
         canvas.save();
-        canvas.translate(world.getPivot().x, height - world.getPivot().y);
 
-        canvas.drawCircle(0, 0, world.getPivotRadius(), paint);
+        //Pivot
+        canvas.translate(world.getPivot().x, height - world.getPivot().y);
+        canvas.drawCircle(0, 0, world.getPivotRadius(), red);
 
         canvas.restore();
-
         canvas.save();
+
+        //Swing
         canvas.translate(world.getSwing().x, height - world.getSwing().y);
         canvas.rotate((float) - (world.swingAng() * 57.2958));
-
-        canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, paint);
+        canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, red);
 
         canvas.restore();
-
-        paint.setARGB(100, 0, 0, 255);
-
         canvas.save();
+
+        //Target
         canvas.translate(world.getTarget().x, height - world.getTarget().y);
-
-        canvas.drawCircle(0, 0, world.getTargetRadius(), paint);
+        canvas.drawCircle(0, 0, world.getTargetRadius(), blue);
 
         canvas.restore();
-
-        paint.setARGB(100, 120, 120, 0);
-
         canvas.save();
+
+        //Bullet
         canvas.translate(world.getBullet().x, height - world.getBullet().y);
         canvas.rotate((float) - (world.bulletAng() * 57.2958));
-
-        canvas.drawRect(- world.bulletWidth() / 2, - world.bulletHeight() / 2, world.bulletWidth() / 2, world.bulletHeight() / 2, paint);
+        canvas.drawRect(- world.bulletWidth() / 2, - world.bulletHeight() / 2, world.bulletWidth() / 2, world.bulletHeight() / 2, grey);
 
         canvas.restore();
-
-        paint.setARGB(100, 0, 255, 0);
-
         canvas.save();
-        canvas.translate(world.getGround().x, height - world.getGround().y);
 
-        canvas.drawRect(- world.groundWidth() / 2,  - world.groundHeight() / 2, world.groundWidth() / 2, world.groundHeight() / 2, paint);
+        //Ground
+        canvas.translate(world.getGround().x, height - world.getGround().y);
+        canvas.drawRect(- world.groundWidth() / 2,  - world.groundHeight() / 2, world.groundWidth() / 2, world.groundHeight() / 2, green);
 
         canvas.restore();
 
+        //If the new ball is created
         if(world.ballIsCreate()) {
             canvas.save();
             canvas.translate(world.getBall().x, height - world.getBall().y);
-
-            canvas.drawCircle(0, 0, world.geBallRadius(), paint);
-
+            canvas.drawCircle(0, 0, world.geBallRadius(), green);
             canvas.restore();
         }
 
@@ -153,6 +155,4 @@ public class WorldView extends View {
 
         }
     }
-
-
 }
