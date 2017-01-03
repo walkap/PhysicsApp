@@ -6,43 +6,64 @@
     tools:context=".SettingsActivity">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:baselineAligned="false">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <TextView
+            android:text="@string/txtvGravity"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <CheckBox
-                android:text="@string/cbbtnDefGravity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/cbGravity"
-                />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="30sp" />
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:orientation="vertical"
 
-            <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/editText"
-                style="@style/Widget.AppCompat.EditText"
-                android:textSize="12sp"
-                android:hint="@string/edtxtGravity"/>
+                android:layout_height="match_parent" >
+
+                <RadioButton
+                    android:text="@string/strEarth"
+                    android:layout_width="wrap_content"
+                    android:textStyle="italic"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton4"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:text="@string/strVenus"
+                    android:textStyle="italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton3"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:text="@string/strJupiter"
+                    android:textStyle="italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:text="@string/strSaturn"
+                    android:textStyle="italic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton2"
+                    android:layout_weight="1" />
+            </RadioGroup>
+
         </LinearLayout>
 
     </LinearLayout>

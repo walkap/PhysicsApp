@@ -14,36 +14,51 @@ import org.jbox2d.common.Vec2;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    RadioButton rad;
-    CheckBox cb;
-    EditText et;
+
+    //CheckBox cb;
+    //EditText et;
     WorldView world;
     Vec2 gravity;
     float x = 0.0f , y;
-
 
     @Override
     protected void onCreate(Bundle savedIstanceState) {
         super.onCreate(savedIstanceState);
         setContentView(R.layout.activity_settings);
-        et=(EditText) findViewById(R.id.editText);
+        /*et=(EditText) findViewById(R.id.editText);
         et.setVisibility(View.VISIBLE);
+
         cb = (CheckBox) findViewById(R.id.cbGravity);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(cb.isChecked()){
+                    et.setVisibility(View.GONE);
+                    world.setGravityDefault(true);
+                }else{
+                    et.setVisibility(View.VISIBLE);
+                    world.setGravityDefault(false);
+                    gravity = new Vec2(x,y);
+                    world.setGravity(gravity);
+                }
+            }
+        });*/
+
 
     }
 
-    private void setGravityManually(){
+
+    /*private void setGravityManually(){
         if(cb.isChecked()){
-            et.setVisibility(View.INVISIBLE);
+            et.setVisibility(View.GONE);
             world.setGravityDefault(true);
         }else{
             et.setVisibility(View.VISIBLE);
             world.setGravityDefault(false);
-            y = Float.valueOf(String.valueOf(et.getText()));
             gravity = new Vec2(x,y);
             world.setGravity(gravity);
         }
-    }
+    }*/
 
 
 }

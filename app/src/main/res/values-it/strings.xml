@@ -8,4 +8,5 @@
     <string name="strJupiter">Giove</string>
     <string name="strSaturn">Saturno</string>
     <string name="strVenus">Venere</string>
+    <string name="txtvGravity">SCEGLI LA GRAVITA</string>
 </resources>
