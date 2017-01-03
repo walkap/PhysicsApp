@@ -18,9 +18,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="resetGame"
-            android:text="@string/btnReset" />
-
+            android:text="@string/btnReset"
+            android:id="@+id/resetWorld"/>
     </LinearLayout>
 
     <com.walkap.physicsapp.WorldView
