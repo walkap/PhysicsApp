@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -22,6 +21,9 @@ public class WorldView extends View {
 
     static float height;
     static float width;
+
+    static float top;
+    static float left;
 
     boolean gravityDefault = true;
     Vec2 gravity;
@@ -75,6 +77,8 @@ public class WorldView extends View {
             width = this.getWidth();
             world.setMaxX(width);
             world.setMaxY(height);
+            top = getTop();
+            left = getLeft();
             hey = false;
         }
 
@@ -150,7 +154,7 @@ public class WorldView extends View {
             //Log.e("worldView", "e.getX " + e.getX() + "\n");
             //Log.e("worldView", "e.getY " + (e.getY()) + "\n");
             if(!world.ballIsCreate()) {
-                world.createBall((e.getX()), ( height - e.getY() + 415.0f));
+                world.createBall((e.getX()) - left, ( height - e.getY() + 2 * top));
             }
 
         }
