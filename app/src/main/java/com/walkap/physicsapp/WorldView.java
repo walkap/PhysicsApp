@@ -1,10 +1,9 @@
 package com.walkap.physicsapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.opengl.GLSurfaceView;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,8 +11,8 @@ import android.view.View;
 
 import org.jbox2d.common.Vec2;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+import java.util.logging.Handler;
+
 
 public class WorldView extends View {
 
@@ -32,8 +31,8 @@ public class WorldView extends View {
     static float top;
     static float left;
 
-    boolean gravityDefault = true;
-    Vec2 gravity;
+    static boolean gravityDefault = true;
+    static Vec2 gravity = new Vec2(0.0f, 1.0f);
 
     Canvas canvas;
 
@@ -46,28 +45,16 @@ public class WorldView extends View {
     }
 
     public void update(){
-        /*Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                Handler h = new Handler (Lopper.getMainLopper());
-                h.post(new Runnable() {
-                    public void run() {
-                        invalidate();
-                    }
-                });
-                //postInvalidate();
+        new Thread(new Runnable() {
+            public void run(){
+                postInvalidate();
             }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();*/
-
-        postInvalidate();
+        }).start();
     }
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
-
 
         red.setARGB(100, 255, 0, 0);
         green.setARGB(100, 0, 255, 0);
@@ -75,16 +62,15 @@ public class WorldView extends View {
         blue.setARGB(100, 0, 0, 255);
 
         if(hey) {
-            if(gravityDefault) {
-                world = new MyWorld();
-            }
-            else {
-                world = new MyWorld(gravity);
-            }
             height = this.getHeight();
             width = this.getWidth();
-            world.setMaxX(width);
-            world.setMaxY(height);
+            if(gravityDefault) {
+                world = new MyWorld(width);
+            }
+            else {
+                world = new MyWorld(gravity, width);
+                Log.e("WorldView", "" + gravity.y);
+            }
             top = getTop();
             left = getLeft();
             hey = false;
@@ -105,18 +91,18 @@ public class WorldView extends View {
         canvas.drawRect(- world.swingWidth() / 2 * 10, - world.swingHeight() / 2 * 10, world.swingWidth() / 2 * 10, world.swingHeight() / 2 * 10, red);
 
         canvas.restore();
-        canvas.save();
+        //canvas.save();
 
         //Target
-        canvas.translate(world.getTarget().x * 10, height - world.getTarget().y * 10);
-        canvas.drawCircle(0, 0, world.getTargetRadius() * 10, blue);
+        //canvas.translate(world.getTarget().x * 10, height - world.getTarget().y * 10);
+        //canvas.drawCircle(0, 0, world.getTargetRadius() * 10, blue);
 
-        canvas.restore();
+        //canvas.restore();
         canvas.save();
 
         //Bullet
         canvas.translate(world.getBullet().x * 10, height - world.getBullet().y * 10);
-        //canvas.rotate((float) - (world.bulletAng() * 57.2958));
+        canvas.rotate((float) - (world.bulletAng() * 57.2958));
         canvas.drawRect(- world.bulletWidth() / 2 * 10, - world.bulletHeight() / 2 * 10, world.bulletWidth() / 2 * 10, world.bulletHeight() / 2 * 10, grey);
 
         canvas.restore();
@@ -146,7 +132,6 @@ public class WorldView extends View {
 
         world.playWorld();
         update();
-
     }
 
     public void setGravityDefault(boolean gravityDefaultSet){
@@ -159,10 +144,12 @@ public class WorldView extends View {
 
     public static void TouchEvent(MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
+            float x = e.getX();
+            float y = e.getY();
             //Log.e("worldView", "e.getX " + e.getX() + "\n");
             //Log.e("worldView", "e.getY " + (e.getY()) + "\n");
             if(!world.ballIsCreate()) {
-                world.createBall(((e.getX()) - left) / 10, (height - e.getY() + 2 * top) / 10);
+                world.createBall((x - left) / 10, (height - y + 2 * top) / 10, 0.2f, 0.8f, 100.0f);
             }
 
         }
