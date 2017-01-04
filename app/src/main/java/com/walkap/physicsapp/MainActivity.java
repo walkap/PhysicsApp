@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void startGame(View view) {
         Intent intent = new Intent(this, WorldActivity.class);
+        String message = "main";
+        intent.putExtra("EXTRA_MESSAGE", message);
+        WorldView.gravityDefault = true;
         startActivity(intent);
     }
 
