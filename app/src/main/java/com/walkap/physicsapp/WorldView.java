@@ -1,14 +1,19 @@
 package com.walkap.physicsapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import org.jbox2d.common.Vec2;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
 
 public class WorldView extends View {
 
@@ -17,6 +22,7 @@ public class WorldView extends View {
     Paint green = new Paint();
     Paint grey = new Paint();
     Paint blue = new Paint();
+
 
     boolean hey = true;
 
@@ -61,6 +67,7 @@ public class WorldView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
+
 
         red.setARGB(100, 255, 0, 0);
         green.setARGB(100, 0, 255, 0);
@@ -109,7 +116,7 @@ public class WorldView extends View {
 
         //Bullet
         canvas.translate(world.getBullet().x * 10, height - world.getBullet().y * 10);
-        canvas.rotate((float) - (world.bulletAng() * 57.2958));
+        //canvas.rotate((float) - (world.bulletAng() * 57.2958));
         canvas.drawRect(- world.bulletWidth() / 2 * 10, - world.bulletHeight() / 2 * 10, world.bulletWidth() / 2 * 10, world.bulletHeight() / 2 * 10, grey);
 
         canvas.restore();

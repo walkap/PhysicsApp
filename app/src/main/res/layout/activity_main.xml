@@ -36,8 +36,8 @@
             android:background="@color/colorBlack_overlay"
             android:onClick="settingsGame"
             android:text="@string/btnSettings"
-            android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@color/light"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:visibility="visible" />
 
         <LinearLayout

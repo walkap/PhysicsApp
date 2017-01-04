@@ -1,5 +1,6 @@
 package com.walkap.physicsapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,13 @@ import static com.walkap.physicsapp.WorldView.world;
 public class WorldActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button resetButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world);
+
 
         resetButton = (Button) findViewById(R.id.resetButton);
         resetButton.setOnClickListener(this);
@@ -24,6 +27,7 @@ public class WorldActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onPause(){
+
         super.onPause();
     }
 

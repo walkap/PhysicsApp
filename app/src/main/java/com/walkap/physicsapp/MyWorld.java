@@ -60,7 +60,7 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(25.0f, 4.0f, 3.0f);
+        createPivot(25.0f, 4.0f, 2.5f);
 
         createSwing(26.5f, 8.0f, 25.0f, 1.0f);
 
@@ -146,7 +146,7 @@ public class MyWorld {
         FixtureDef groundFixture = new FixtureDef();
         groundFixture.shape = groundShape;
         groundFixture.userData = null;
-        groundFixture.friction = 5.0f;
+        groundFixture.friction = 0.25f;
         groundFixture.restitution = 0.05f;
         groundFixture.density = 1.0f;
         groundFixture.isSensor = false;
@@ -205,7 +205,7 @@ public class MyWorld {
         pivot.gravityScale = 1.0f;
         pivot.linearDamping = 0.0f;
         pivot.angularDamping = 0.0f;
-        pivot.type = BodyType.KINEMATIC;
+        pivot.type = BodyType.DYNAMIC;
 
 
         //define pivot shape of the body.
@@ -276,9 +276,9 @@ public class MyWorld {
         swingFixture = new FixtureDef();
         swingFixture.shape = swingShape;
         swingFixture.userData = null;
-        swingFixture.friction = 25.0f;
-        swingFixture.restitution = 0.0f;
-        swingFixture.density = 0.75f;
+        swingFixture.friction = 0.25f;
+        swingFixture.restitution = 0.2f;
+        swingFixture.density = 0.10f;
         swingFixture.isSensor = false;
 
         //create the swing body and add fixture to it
@@ -377,6 +377,7 @@ public class MyWorld {
         ball.position.set(new Vec2(posX, posY));
         ball.type = BodyType.DYNAMIC;
 
+
         //define ball shape of the body.
         ballShape = new CircleShape();
         ballShape.m_radius = 2f;
@@ -384,9 +385,9 @@ public class MyWorld {
         //define ball fixture of the body.
         ballFixture = new FixtureDef();
         ballFixture.shape = ballShape;
-        swingFixture.friction = 25.0f;
-        swingFixture.restitution = 5.0f;
-        swingFixture.density = 0.75f;
+        swingFixture.friction = 0.2f;
+        swingFixture.restitution = 0.8f;
+        swingFixture.density = 0.80f;
 
         //create the ball body and add fixture to it
         ballBody = world.createBody(ball);
@@ -448,8 +449,8 @@ public class MyWorld {
         bulletFixture = new FixtureDef();
         bulletFixture.shape = swingShape;
         bulletFixture.userData = null;
-        bulletFixture.friction = 25.0f;
-        bulletFixture.restitution = 0.0f;
+        bulletFixture.friction = 0.25f;
+        bulletFixture.restitution = 0.1f;
         bulletFixture.density = 0.75f;
         bulletFixture.isSensor = false;
 

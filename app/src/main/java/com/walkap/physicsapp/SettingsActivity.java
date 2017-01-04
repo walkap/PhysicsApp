@@ -3,6 +3,7 @@ package com.walkap.physicsapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.content.Intent;
 
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -11,9 +12,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import org.jbox2d.common.Vec2;
-
-import static android.R.attr.type;
-import static android.R.attr.value;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -27,6 +25,14 @@ public class SettingsActivity extends AppCompatActivity {
     RadioButton rbVenus;
     RadioButton rbJupiter;
     RadioButton rbSaturn;
+
+
+    public void GoToGame(View view) {
+        Intent intent = new Intent(this, WorldActivity.class);
+        Intent intentGra = new Intent(this, WorldView.class);
+        startActivity(intent);
+    }
+
 
 
 
@@ -45,28 +51,34 @@ public class SettingsActivity extends AppCompatActivity {
                     // Set Earth Gravity
                     case R.id.radioButton4:
                         ygravity = -10f;
+                        gravity = new Vec2(x , ygravity);
                         break;
 
                     // Set Venus Gravity
                     case R.id.radioButton3:
                         ygravity = -9f;
+                        gravity = new Vec2(x , ygravity);
                         break;
 
                    // Set Jupiter Gravity
                     case R.id.radioButton:
                         ygravity = -25f;
+                        gravity = new Vec2(x , ygravity);
                         break;
 
                     // Set Saturn Gravity
                     case R.id.radioButton2:
                         ygravity = -11f;
+                        gravity = new Vec2(x , ygravity);
                         break;
                 }
 
-                gravity = new Vec2(x , ygravity);
+                //gravity = new Vec2(x , ygravity);
                 //world.setGravity(gravity);
             }
         });
+
+
 
 
 
@@ -95,6 +107,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     }
+
 
 
     /*private void setGravityManually(){
