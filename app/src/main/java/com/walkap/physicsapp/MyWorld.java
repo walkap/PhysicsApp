@@ -29,7 +29,7 @@ public class MyWorld {
     private CircleShape pivotShape;
     private PolygonShape swingShape;
     private PolygonShape groundShape;
-    private CircleShape ballShape;
+    private PolygonShape ballShape;
     private PolygonShape bulletShape;
 
     private FixtureDef pivotFixture;
@@ -53,7 +53,9 @@ public class MyWorld {
         float frictionBullet = 0.5f, restitutionBullet = 0.1f, densityBullet=0.0001f;
 
         createPivot(width / 20, 6f, 5f, frictionPivot, restitutionPivot, densityPivot);
+
         createSwing(width / 20 + 0.2f, 8.0f, 45.0f, 1.0f, frictionSwing, restitutionSwing, densitySwing);
+
         createBullet(width / 20 + 40.0f, 10.5f,frictionBullet, restitutionBullet, densityBullet);
     }
 
@@ -71,10 +73,11 @@ public class MyWorld {
     public MyWorld(float width){
 
         //world definition
-        Vec2 gravity = new Vec2(0.0f, -9.8f);
+        Vec2 gravity = new Vec2(0.0f, -1.0f);
         world = new World(gravity);
 
         createGround(width);
+
         CreateBodies(width);
 
     }
@@ -85,6 +88,7 @@ public class MyWorld {
         world = new World(gravity);
 
         createGround(width);
+
         CreateBodies(width);
 
     }
@@ -92,13 +96,14 @@ public class MyWorld {
     public void resetWorld(float width){
 
         DestroyBodies();
+
         CreateBodies(width);
     }
 
     public void playWorld(){
         float timeStep = 1.0f / 60.f;
-        int velocityIterations = 2;
-        int positionIterations = 1;
+        int velocityIterations = 6;
+        int positionIterations = 2;
 
         world.step(timeStep, velocityIterations, positionIterations);
     }
@@ -272,8 +277,8 @@ public class MyWorld {
 
 
         //define ball shape of the body.
-        ballShape = new CircleShape();
-        ballShape.m_radius = 10f;
+        ballShape = new PolygonShape();
+        ballShape.setAsBox(1.5f, 1.5f);
 
         //define ball fixture of the body.
         ballFixture = new FixtureDef();
@@ -293,12 +298,25 @@ public class MyWorld {
         world.destroyBody(ballBody);
     }
 
-    public Vec2 getBall() {
-        return ballBody.getPosition();
+    public Vec2 getBall(){
+        Vec2 posBall = ballBody.getPosition();
+        return posBall;
     }
 
-    public float geBallRadius(){
-        return(ballShape.m_radius);
+    public float ballHeight(){
+        Vec2 vec0 = ballShape.getVertex(0);
+        Vec2 vec2 = ballShape.getVertex(2);
+        return(vec2.y - vec0.y);
+    }
+
+    public float ballWidth(){
+        Vec2 vec0 = ballShape.getVertex(0);
+        Vec2 vec2 = ballShape.getVertex(2);
+        return(vec2.x - vec0.x);
+    }
+
+    public float ballAng(){
+        return ballBody.getAngle();
     }
 
     public boolean ballIsCreate(){

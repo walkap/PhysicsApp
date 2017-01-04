@@ -91,8 +91,6 @@ public class WorldView extends View {
         canvas.drawRect(- world.swingWidth() / 2 * 10, - world.swingHeight() / 2 * 10, world.swingWidth() / 2 * 10, world.swingHeight() / 2 * 10, red);
 
         canvas.restore();
-
-        //canvas.restore();
         canvas.save();
 
         //Bullet
@@ -113,7 +111,8 @@ public class WorldView extends View {
         if(world.ballIsCreate()) {
             canvas.save();
             canvas.translate(world.getBall().x * 10, height - world.getBall().y * 10);
-            canvas.drawCircle(0, 0, world.geBallRadius() * 10, green);
+            canvas.rotate((float) - (world.ballAng() * 57.2958));
+            canvas.drawRect(- world.ballWidth() / 2 * 10,  - world.ballHeight() / 2 * 10, world.ballWidth() / 2 * 10, world.ballHeight() / 2 * 10, green);
             canvas.restore();
         }
 
