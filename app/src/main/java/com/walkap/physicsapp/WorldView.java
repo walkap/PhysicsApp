@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -85,46 +86,46 @@ public class WorldView extends View {
         canvas.save();
 
         //Pivot
-        canvas.translate(world.getPivot().x, height - world.getPivot().y);
-        canvas.drawCircle(0, 0, world.getPivotRadius(), red);
+        canvas.translate(world.getPivot().x * 10, height - world.getPivot().y * 10);
+        canvas.drawCircle(0, 0, world.getPivotRadius() * 10, red);
 
         canvas.restore();
         canvas.save();
 
         //Swing
-        canvas.translate(world.getSwing().x, height - world.getSwing().y);
+        canvas.translate(world.getSwing().x * 10, height - world.getSwing().y * 10);
         canvas.rotate((float) - (world.swingAng() * 57.2958));
-        canvas.drawRect(- world.swingWidth() / 2, - world.swingHeight() / 2, world.swingWidth() / 2, world.swingHeight() / 2, red);
+        canvas.drawRect(- world.swingWidth() / 2 * 10, - world.swingHeight() / 2 * 10, world.swingWidth() / 2 * 10, world.swingHeight() / 2 * 10, red);
 
         canvas.restore();
         canvas.save();
 
         //Target
-        canvas.translate(world.getTarget().x, height - world.getTarget().y);
-        canvas.drawCircle(0, 0, world.getTargetRadius(), blue);
+        canvas.translate(world.getTarget().x * 10, height - world.getTarget().y * 10);
+        canvas.drawCircle(0, 0, world.getTargetRadius() * 10, blue);
 
         canvas.restore();
         canvas.save();
 
         //Bullet
-        canvas.translate(world.getBullet().x, height - world.getBullet().y);
+        canvas.translate(world.getBullet().x * 10, height - world.getBullet().y * 10);
         canvas.rotate((float) - (world.bulletAng() * 57.2958));
-        canvas.drawRect(- world.bulletWidth() / 2, - world.bulletHeight() / 2, world.bulletWidth() / 2, world.bulletHeight() / 2, grey);
+        canvas.drawRect(- world.bulletWidth() / 2 * 10, - world.bulletHeight() / 2 * 10, world.bulletWidth() / 2 * 10, world.bulletHeight() / 2 * 10, grey);
 
         canvas.restore();
         canvas.save();
 
         //Ground
-        canvas.translate(world.getGround().x, height - world.getGround().y);
-        canvas.drawRect(- world.groundWidth() / 2,  - world.groundHeight() / 2, world.groundWidth() / 2, world.groundHeight() / 2, green);
+        canvas.translate(world.getGround().x * 10, height - world.getGround().y * 10);
+        canvas.drawRect(- world.groundWidth() / 2 * 10,  - world.groundHeight() / 2 * 10, world.groundWidth() / 2 * 10, world.groundHeight() / 2 * 10, green);
 
         canvas.restore();
 
         //If the new ball is created
         if(world.ballIsCreate()) {
             canvas.save();
-            canvas.translate(world.getBall().x, height - world.getBall().y);
-            canvas.drawCircle(0, 0, world.geBallRadius(), green);
+            canvas.translate(world.getBall().x * 10, height - world.getBall().y * 10);
+            canvas.drawCircle(0, 0, world.geBallRadius() * 10, green);
             canvas.restore();
         }
 

@@ -60,11 +60,11 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(250.0f, 40.0f, 30.0f);
+        createPivot(25.0f, 4.0f, 3.0f);
 
-        createSwing(265.0f, 80.0f, 250.0f, 10.0f);
+        createSwing(26.5f, 8.0f, 25.0f, 1.0f);
 
-        createBullet(425.0f, 105.0f);
+        createBullet(42.5f, 10.5f);
 
     }
 
@@ -75,11 +75,11 @@ public class MyWorld {
 
         createGround();
 
-        createPivot(250.0f, 40.0f, 30.0f);
+        createPivot(25.0f, 4.0f, 3.0f);
 
-        createSwing(265.0f, 80.0f, 250.0f, 10.0f);
+        createSwing(26.5f, 8.0f, 25.0f, 1.0f);
 
-        createBullet(425.0f, 105.0f);
+        createBullet(42.5f, 10.5f);
 
     }
 
@@ -94,11 +94,11 @@ public class MyWorld {
         destroyTarget();
         destroyBullet();
 
-        createPivot(250.0f, 40.0f, 30.0f);
+        createPivot(25.0f, 4.0f, 3.0f);
 
-        createSwing(265.0f, 80.0f, 250.0f, 10.0f);
+        createSwing(26.5f, 8.0f, 25.0f, 1.0f);
 
-        createBullet(425.0f, 105.0f);
+        createBullet(42.5f, 10.5f);
 
         createTarget();
     }
@@ -140,7 +140,7 @@ public class MyWorld {
 
         //define ground shape of the body.
         groundShape = new PolygonShape();
-        groundShape.setAsBox(1000.0f,5.0f);
+        groundShape.setAsBox(100.0f,0.5f);
 
         //define ground fixture of the body.
         FixtureDef groundFixture = new FixtureDef();
@@ -321,7 +321,7 @@ public class MyWorld {
     }
 
     private void createTarget(){
-        float radius = 20.0f;
+        float radius = 2.0f;
 
         //target body definition
         target = new BodyDef();
@@ -379,7 +379,7 @@ public class MyWorld {
 
         //define ball shape of the body.
         ballShape = new CircleShape();
-        ballShape.m_radius = 20f;
+        ballShape.m_radius = 2f;
 
         //define ball fixture of the body.
         ballFixture = new FixtureDef();
@@ -442,7 +442,7 @@ public class MyWorld {
 
         //define bullet shape of the body.
         bulletShape = new PolygonShape();
-        bulletShape.setAsBox(15.0f, 15.0f);
+        bulletShape.setAsBox(1.5f, 1.5f);
 
         //define bullet fixture of the body.
         bulletFixture = new FixtureDef();
