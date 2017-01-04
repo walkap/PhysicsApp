@@ -55,7 +55,7 @@ public class MyWorld {
     public MyWorld() {
 
         //world definition
-        Vec2 gravity = new Vec2(0.0f, -10.0f);
+        Vec2 gravity = new Vec2(0.0f, -1f);
         world = new World(gravity);
 
         createGround();
@@ -277,7 +277,7 @@ public class MyWorld {
         swingFixture.shape = swingShape;
         swingFixture.userData = null;
         swingFixture.friction = 25.0f;
-        swingFixture.restitution = 0.05f;
+        swingFixture.restitution = 0.0f;
         swingFixture.density = 0.75f;
         swingFixture.isSensor = false;
 
@@ -332,7 +332,7 @@ public class MyWorld {
         rand = new Random();
         float randY = rand.nextFloat();
 
-        target.position = new Vec2(randX * maxX / 2 + maxX/2 - radius ,randY * maxY / 2 + maxY/2 - radius);
+        target.position = new Vec2((randX * maxX / 2 + maxX/2 - radius) / 10 ,(randY * maxY / 2 + maxY/2 - radius) / 10);
 
         target.type = BodyType.KINEMATIC;
 
@@ -449,7 +449,7 @@ public class MyWorld {
         bulletFixture.shape = swingShape;
         bulletFixture.userData = null;
         bulletFixture.friction = 25.0f;
-        bulletFixture.restitution = 0.05f;
+        bulletFixture.restitution = 0.0f;
         bulletFixture.density = 0.75f;
         bulletFixture.isSensor = false;
 

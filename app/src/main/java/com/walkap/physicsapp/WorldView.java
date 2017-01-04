@@ -155,7 +155,7 @@ public class WorldView extends View {
             //Log.e("worldView", "e.getX " + e.getX() + "\n");
             //Log.e("worldView", "e.getY " + (e.getY()) + "\n");
             if(!world.ballIsCreate()) {
-                world.createBall((e.getX()) - left, ( height - e.getY() + 2 * top));
+                world.createBall(((e.getX()) - left) / 10, (height - e.getY() + 2 * top) / 10);
             }
 
         }
