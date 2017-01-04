@@ -91,11 +91,6 @@ public class WorldView extends View {
         canvas.drawRect(- world.swingWidth() / 2 * 10, - world.swingHeight() / 2 * 10, world.swingWidth() / 2 * 10, world.swingHeight() / 2 * 10, red);
 
         canvas.restore();
-        //canvas.save();
-
-        //Target
-        //canvas.translate(world.getTarget().x * 10, height - world.getTarget().y * 10);
-        //canvas.drawCircle(0, 0, world.getTargetRadius() * 10, blue);
 
         //canvas.restore();
         canvas.save();
@@ -122,32 +117,14 @@ public class WorldView extends View {
             canvas.restore();
         }
 
-        /*if(world.bulletHitTarget()){
-            Log.e("worldView", " the bullet hit the target");
-        }*/
-
-        //Log.e("WorldView", "height ball" +  (this.getHeight() - world.getPivot().y) + "\n");
-        //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y - world.swingHeight() / 2)) + "\n");
-        //Log.e("WorldView", "height swing" + (this.getHeight() - (world.getSwing().y + world.swingHeight() / 2)) + "\n");
-
         world.playWorld();
         update();
-    }
-
-    public void setGravityDefault(boolean gravityDefaultSet){
-        gravityDefault = gravityDefaultSet;
-    }
-
-    public void setGravity(Vec2 gravitySet){
-        gravity = gravitySet;
     }
 
     public static void TouchEvent(MotionEvent e) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             float x = e.getX();
             float y = e.getY();
-            //Log.e("worldView", "e.getX " + e.getX() + "\n");
-            //Log.e("worldView", "e.getY " + (e.getY()) + "\n");
             if(!world.ballIsCreate()) {
                 world.createBall((x - left) / 10, (height - y + 2 * top) / 10, 0.2f, 0.8f, 100.0f);
             }
