@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">PhysicsApp</string>
     <string name="btnStart">START</string>
-    <string name="strWelcome" translatable="false">JBOX2D DEMO</string>
+    <string name="strWelcome" translatable="false">CATAPULT\nJBOX2D DEMO</string>
     <string name="btnReset" translatable="false">Reset</string>
     <string name="btnSettings">SETTINGS</string>
     <string name="edtxtGravity">Type a number</string>
@@ -11,4 +11,5 @@
     <string name="strSaturn">Saturn</string>
     <string name="txtvGravity">CHOOSE GRAVITY</string>
     <string name="cbbtnDefGravity">Earth gravity</string>
+    <string name="strInverse">Inverse</string>
 </resources>
