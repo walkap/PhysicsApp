@@ -53,9 +53,7 @@ public class MyWorld {
         float frictionBullet = 0.5f, restitutionBullet = 0.1f, densityBullet=0.0001f;
 
         createPivot(width / 20, 6f, 5f, frictionPivot, restitutionPivot, densityPivot);
-
         createSwing(width / 20 + 0.2f, 8.0f, 45.0f, 1.0f, frictionSwing, restitutionSwing, densitySwing);
-
         createBullet(width / 20 + 40.0f, 10.5f,frictionBullet, restitutionBullet, densityBullet);
     }
 
@@ -73,11 +71,10 @@ public class MyWorld {
     public MyWorld(float width){
 
         //world definition
-        Vec2 gravity = new Vec2(0.0f, -1.0f);
+        Vec2 gravity = new Vec2(0.0f, -9.8f);
         world = new World(gravity);
 
         createGround(width);
-
         CreateBodies(width);
 
     }
@@ -88,7 +85,6 @@ public class MyWorld {
         world = new World(gravity);
 
         createGround(width);
-
         CreateBodies(width);
 
     }
@@ -96,14 +92,13 @@ public class MyWorld {
     public void resetWorld(float width){
 
         DestroyBodies();
-
         CreateBodies(width);
     }
 
     public void playWorld(){
-        float timeStep = 20.0f / 60.f;
-        int velocityIterations = 6;
-        int positionIterations = 2;
+        float timeStep = 1.0f / 60.f;
+        int velocityIterations = 2;
+        int positionIterations = 1;
 
         world.step(timeStep, velocityIterations, positionIterations);
     }
