@@ -8,6 +8,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import org.jbox2d.common.Vec2;
+
+import static com.walkap.physicsapp.WorldView.width;
 import static com.walkap.physicsapp.WorldView.world;
 
 public class WorldActivity extends AppCompatActivity implements View.OnClickListener{
@@ -20,6 +23,12 @@ public class WorldActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world);
 
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("EXTRA_MESSAGE");
+        if(!message.equals("main")) {
+            WorldView.gravityDefault = false;
+            WorldView.gravity = new Vec2(0.0f, Float.parseFloat(message));
+        }
 
         resetButton = (Button) findViewById(R.id.resetButton);
         resetButton.setOnClickListener(this);
@@ -33,7 +42,7 @@ public class WorldActivity extends AppCompatActivity implements View.OnClickList
 
     public void onClick(View resetButton){
         try{
-            world.resetWorld();
+            world.resetWorld(width);
         } catch (Exception e) {
             Log.e("WorldActivity","error in Reset");
         }
@@ -48,4 +57,6 @@ public class WorldActivity extends AppCompatActivity implements View.OnClickList
         }
         return true;
     }
+
+
 }
